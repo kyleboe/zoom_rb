@@ -6,7 +6,7 @@ module Zoom
       def user_list(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.permit(%i[status page_size page_number])
-        response = self.class.get('/users', query: params.merge(access_token: access_token))
+        response = self.class.get('/users', query: params, headers: request_headers)
         Utils.parse_response(response)
       end
 
@@ -16,25 +16,25 @@ module Zoom
         require_param_keys.append(:password) if params[:action] == 'autoCreate'
         params.require(require_param_keys)
         params.permit_value(:action, Zoom::Constants::USER_CREATE_TYPES.keys)
-        Utils.parse_response self.class.post('/users', body: { action: params[:action], user_info: params.except(:action) }.to_json, query: { access_token: access_token })
+        Utils.parse_response self.class.post('/users', body: { action: params[:action], user_info: params.except(:action) }.to_json, headers: request_headers)
       end
 
       def user_get(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:id).permit(:login_type)
-        Utils.parse_response self.class.get("/users/#{params[:id]}", query: params.except(:id).merge(access_token: access_token))
+        Utils.parse_response self.class.get("/users/#{params[:id]}", query: params.except(:id), headers: request_headers)
       end
 
       def user_update(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:id).permit(%i[first_name last_name type pmi timezone dept vanity_name host_key cms_user_id])
-        Utils.parse_response self.class.patch("/users/#{params[:id]}", body: params.except(:id), query: { access_token: access_token })
+        Utils.parse_response self.class.patch("/users/#{params[:id]}", body: params.except(:id), headers: request_headers)
       end
 
       def user_delete(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:id).permit(%i[action transfer_email transfer_meeting transfer_webinar transfer_recording])
-        Utils.parse_response self.class.delete("/users/#{params[:id]}", query: params.except(:id).merge(access_token: access_token))
+        Utils.parse_response self.class.delete("/users/#{params[:id]}", query: params.except(:id), headers: request_headers)
       end
 
       def user_assistants_list(*args)
@@ -42,21 +42,21 @@ module Zoom
         # TODO: implement user_assistants_list
         # options = Utils.extract_options!(args)
         # Utils.require_params([:user_id], options)
-        Utils.parse_response self.class.get("/users/#{options.slice!(:id)}/assistants", query: options.merge(access_token: access_token))
+        Utils.parse_response self.class.get("/users/#{options.slice!(:id)}/assistants", query: options, headers: request_headers)
       end
 
       def user_assistants_create(*args)
         raise Zoom::NotImplemented, 'user_assistants_create is not yet implemented'
         # TODO: validate body attributes
         options = Utils.extract_options!(args)
-        Utils.parse_response self.class.post("/users/#{options.slice!(:id)}/assistants", body: options, query: { access_token: access_token })
+        Utils.parse_response self.class.post("/users/#{options.slice!(:id)}/assistants", body: options, headers: request_headers)
       end
 
       def user_assistants_delete_all(*args)
         raise Zoom::NotImplemented, 'user_assistants_delete_all is not yet implemented'
         # TODO: implement user_assistants_delete_all
         options = Utils.extract_options!(args)
-        Utils.parse_response self.class.delete("/users/#{options.slice!(:id)}/assistants", body: options, query: { access_token: access_token })
+        Utils.parse_response self.class.delete("/users/#{options.slice!(:id)}/assistants", body: options, headers: request_headers)
       end
 
       def user_assistants_delete(*args)

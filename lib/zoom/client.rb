@@ -29,6 +29,14 @@ module Zoom
       self.class.default_timeout(@timeout)
     end
 
+    def request_headers
+      {
+        'Accept' => 'application/json',
+        'Content-Type' => 'application/json',
+        'Authorization' => "Bearer #{access_token}"
+      }
+    end
+
     def access_token
       JWT.encode({ iss: @api_key, exp: Time.now.to_i + @timeout }, @api_secret, 'HS256', { typ: 'JWT' })
     end

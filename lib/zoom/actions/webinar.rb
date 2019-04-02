@@ -12,7 +12,7 @@ module Zoom
       def webinar_list(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:host_id).permit(:page_size, :page_number)
-        Utils.parse_response self.class.get("/users/#{params[:host_id]}/webinars", query: params.merge(access_token: access_token))
+        Utils.parse_response self.class.get("/users/#{params[:host_id]}/webinars", query: params, headers: request_headers)
       end
 
       def webinar_create(*args)
@@ -23,13 +23,13 @@ module Zoom
                                         settings: SETTINGS_KEYS)
         # process recurrence keys based on constants
         # process settings keys based on constants
-        Utils.parse_response self.class.post("/users/#{params[:host_id]}/webinars", body: params.except(:host_id).to_json, query: { access_token: access_token })
+        Utils.parse_response self.class.post("/users/#{params[:host_id]}/webinars", body: params.except(:host_id).to_json, headers: request_headers)
       end
 
       def webinar_get(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:id)
-        Utils.parse_response self.class.get("/webinars/#{params[:id]}", query: { access_token: access_token })
+        Utils.parse_response self.class.get("/webinars/#{params[:id]}", headers: request_headers)
       end
 
       def webinar_update(*args)
@@ -38,13 +38,13 @@ module Zoom
                                    :timezone, :password, :agenda,
                                    recurrence: RECURRENCE_KEYS,
                                    settings: SETTINGS_KEYS)
-        Utils.parse_response self.class.patch("/webinars/#{params[:id]}", body: params.except(:id).to_json, query: { access_token: access_token })
+        Utils.parse_response self.class.patch("/webinars/#{params[:id]}", body: params.except(:id).to_json, headers: request_headers)
       end
 
       def webinar_delete(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:id).permit(:occurrence_id)
-        Utils.parse_response self.class.delete("/webinars/#{params[:id]}", query: params.except(:id).merge(access_token: access_token))
+        Utils.parse_response self.class.delete("/webinars/#{params[:id]}", query: params.except(:id), headers: request_headers)
       end
 
       def webinar_status_update(*args)
@@ -80,7 +80,7 @@ module Zoom
       def webinar_registrants_list(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:id).permit(%i[occurrence_id status page_size page_number])
-        Utils.parse_response self.class.get("/webinars/#{params[:id]}/registrants", query: params.except(:id).merge(access_token: access_token))
+        Utils.parse_response self.class.get("/webinars/#{params[:id]}/registrants", query: params.except(:id), headers: request_headers)
       end
 
       def webinar_registrant_add(*args)
@@ -89,14 +89,14 @@ module Zoom
               .permit(%i[occurrence_ids address city country zip state phone
                          industry org job_title purchasing_time_frame role_in_purchase_process
                          no_of_employees comments custom_questions])
-        Utils.parse_response self.class.post("/webinars/#{params[:id]}/registrants", body: params.except(:id, :occurrence_ids).to_json, query: params.slice(:occurrence_ids).merge(access_token: access_token))
+        Utils.parse_response self.class.post("/webinars/#{params[:id]}/registrants", body: params.except(:id, :occurrence_ids).to_json, query: params.slice(:occurrence_ids), headers: request_headers)
       end
 
       def webinar_registrants_status_update(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:id, :action)
               .permit(:occurrence_id, registrants: [])
-        Utils.parse_response self.class.put("/webinars/#{params[:id]}/registrants/status", body: params.except(:id, :occurrence_ids).to_json, query: params.slice(:occurrence_ids).merge(access_token: access_token))
+        Utils.parse_response self.class.put("/webinars/#{params[:id]}/registrants/status", body: params.except(:id, :occurrence_ids).to_json, query: params.slice(:occurrence_ids), headers: request_headers)
       end
 
       def past_webinar_list(*args)
