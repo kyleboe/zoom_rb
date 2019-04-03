@@ -26,7 +26,7 @@ module Zoom
       def recording_delete(*args)
         options = Utils.extract_options!(args)
         Utils.require_params([:meeting_id], options)
-        Utils.parse_response self.class.post('/recording/delete', query: options)
+        Utils.parse_response self.class.delete("/meetings/#{options[:meeting_id]}/recordings",  query: options.except(:meeting_id), headers: request_headers)
       end
     end
   end
