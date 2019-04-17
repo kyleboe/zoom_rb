@@ -33,7 +33,7 @@ module Zoom
         options = Utils.extract_options!(args)
         Utils.require_params([:meeting_id], options)
         Utils.require_params([:recording_id], options)
-        Utils.parse_response self.class.delete("/meetings/#{options[:meeting_id]}/recordings/#{options[:recording_id]}",  query: options.except(:meeting_id).excpet(:recording_id), headers: request_headers)
+        Utils.parse_response self.class.delete("/meetings/#{options[:meeting_id]}/recordings/#{options[:recording_id]}",  query: options.except(:meeting_id,:recording_id), headers: request_headers)
       end
 
     end
