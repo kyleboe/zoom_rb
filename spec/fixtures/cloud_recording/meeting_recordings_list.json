@@ -1,0 +1,40 @@
+{
+   "uuid":"TvycqysNuLLFzA==",
+   "id":46361,
+   "account_id":"QfqQLc8ZpB0VzA",
+   "host_id":"Tnyi6ZEJHeP85Q",
+   "topic":"A Test Meeting",
+   "type":5,
+   "start_time":"2019-05-29T23:53:11Z",
+   "timezone":"America/Denver",
+   "duration":38,
+   "total_size":44964120,
+   "recording_count":2,
+   "share_url":"https://api.zoom.us/recording/share/9r6hULNYAoTHx1wAVSZaxWzg9OsdWTCXtsiwIu",
+   "recording_files":[
+      {
+         "id":"5cd45fa1-a4ae-4d4c-a212-27740e22c67a",
+         "meeting_id":"TvycqysNuLLFzA==",
+         "recording_start":"2019-05-29T23:59:06Z",
+         "recording_end":"2019-05-30T00:30:41Z",
+         "file_type":"MP4",
+         "file_size":32073919,
+         "play_url":"https://api.zoom.us/recording/play/8gRi7QjsMHLfkMuH2NH4XcKL4OiSQg3XCsYaaO6gOyL9_oxOR",
+         "download_url":"https://api.zoom.us/recording/download/8gRi7QjsMHLfkMuH2NH4XcKL4OiSQg3XCsYaaO6gOyL9_oxOR",
+         "status":"completed",
+         "recording_type":"shared_screen_with_speaker_view"
+      },
+      {
+         "id":"80923a69-a5c7-4087-bf39-dfedcc6a14cf",
+         "meeting_id":"TvycqysNuLLFzA==",
+         "recording_start":"2019-05-29T23:59:06Z",
+         "recording_end":"2019-05-30T00:30:41Z",
+         "file_type":"M4A",
+         "file_size":12890201,
+         "play_url":"https://api.zoom.us/recording/play/CPL_PMyBhARUQ8yNLwcTKjKOfJIQxciMvKsl00gEwTuYRbLu",
+         "download_url":"https://api.zoom.us/recording/download/CPL_PMyBhARUQ8yNLwcTKjKOfJIQxciMvKsl00gEwTuYRbLu",
+         "status":"completed",
+         "recording_type":"audio_only"
+      }
+   ]
+}

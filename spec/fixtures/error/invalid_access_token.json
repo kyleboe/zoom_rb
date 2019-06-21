@@ -1,0 +1,4 @@
+{
+   "code":4700,
+   "message":"Invalid access token, does not contain scopes: [recording:write:admin, recording:read:admin]"
+}

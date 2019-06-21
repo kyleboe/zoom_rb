@@ -16,6 +16,7 @@ module Zoom
     include Actions::Recording
     include Actions::IM::Chat
     include Actions::IM::Group
+    include Actions::CloudRecording
 
     base_uri 'https://api.zoom.us/v2'
     headers 'Accept' => 'application/json'
