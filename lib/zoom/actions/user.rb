@@ -90,9 +90,9 @@ module Zoom
       end
 
       def user_settings_get(*args)
-        # TODO: implement user_settings_get
-        # options = Utils.extract_options!(args)
-        raise Zoom::NotImplemented, 'user_settings_get is not yet implemented'
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id).permit(:login_type)
+        Utils.parse_response self.class.get("/users/#{params[:id]}/settings", query: params.except(:id), headers: request_headers)
       end
 
       def user_settings_update(*args)

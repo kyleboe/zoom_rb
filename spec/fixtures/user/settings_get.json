@@ -1,0 +1,74 @@
+{
+  "scheduled_meeting": {
+    "host_video": true,
+    "participants_video": true,
+    "audio_type": "cloud",
+    "join_before_host": true,
+    "use_pmi_for_scheduled_meetings": true,
+    "use_pmi_for_instant_meetings": true,
+    "enforce_login": true,
+    "not_store_meeting_topic": true,
+    "force_pmi_jbh_password": true,
+    "pstn_password_protected": true
+  },
+  "in_meeting": {
+    "e2e_encryption": true,
+    "chat": true,
+    "private_chat": true,
+    "auto_saving_chat": true,
+    "entry_exit_chime": "all",
+    "record_play_voice": true,
+    "file_transfer": true,
+    "feedback": true,
+    "co_host": true,
+    "polling": true,
+    "attendee_on_hold": true,
+    "annotation": true,
+    "remote_control": true,
+    "non_verbal_feedback": true,
+    "breakout_room": true,
+    "remote_support": true,
+    "closed_caption": true,
+    "group_hd": true,
+    "virtual_background": true,
+    "far_end_camera_control": true,
+    "share_dual_camera": true,
+    "attention_tracking": true,
+    "waiting_room": true,
+    "allow_live_streaming": true
+  },
+  "email_notification": {
+    "jbh_reminder": true,
+    "cancel_meeting_reminder": true,
+    "alternative_host_reminder": true
+  },
+  "recording": {
+    "local_recording": true,
+    "cloud_recording": true,
+    "record_speaker_view": true,
+    "record_gallery_view": true,
+    "record_audio_file": true,
+    "save_chat_text": true,
+    "show_timestamp": true,
+    "recording_audio_transcript": true,
+    "auto_recording": "cloud",
+    "auto_delete_cmr": true,
+    "auto_delete_cmr_days": 42
+  },
+  "telephony": {
+    "third_party_audio": true,
+    "audio_conference_info": "Third party audio conference info",
+    "show_international_numbers_link": true
+  },
+  "tsp": {},
+  "feature": {
+    "meeting_capacity": 100,
+    "large_meeting": true,
+    "large_meeting_capacity": 1000,
+    "webinar": true,
+    "webinar_capacity": 500,
+    "cn_meeting": true,
+    "in_meeting": true,
+    "zoom_phone": true
+  }
+}
