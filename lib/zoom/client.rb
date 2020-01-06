@@ -11,6 +11,7 @@ module Zoom
     include Actions::User
     include Actions::Meeting
     include Actions::Metrics
+    include Actions::Phone
     include Actions::Webinar
     include Actions::Report
     include Actions::Recording
