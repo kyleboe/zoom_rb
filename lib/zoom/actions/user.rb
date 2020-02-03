@@ -100,19 +100,10 @@ module Zoom
         raise Zoom::NotImplemented, 'user_settings_update is not yet implemented'
       end
 
-      def debug_class
-        puts self.class
-      end
-
-      def debug_put(url, body, headers)
-        Utils.parse_response self.class.put(url,  body: body, headers: headers)
-      end
-
       def user_status_update(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        puts params
         params.require(:id, :action)
-        Utils.parse_response self.class.put("/users/#{params[:id]}/status",  body: { action: params[:action] }, headers: request_headers)
+        Utils.parse_response self.class.put("/users/#{params[:id]}/status",  body: { action: params[:action] }.to_json, headers: request_headers)
       end
 
       def user_password_update(*args)
