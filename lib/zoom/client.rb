@@ -5,6 +5,7 @@ require 'httparty'
 module Zoom
   class Client
     include HTTParty
+    include Actions::Token
     include Actions::Account
     include Actions::Group
     include Actions::M323Device
@@ -21,12 +22,23 @@ module Zoom
     headers 'Accept' => 'application/json'
     headers 'Content-Type' => 'application/json'
 
-    def request_headers
+    def headers
       {
         'Accept' => 'application/json',
         'Content-Type' => 'application/json',
-        'Authorization' => "Bearer #{access_token}"
       }
+    end
+
+    def oauth_request_headers
+      {
+        'Authorization' => "Basic #{access_token}"
+      }.merge(headers)
+    end
+
+    def request_headers
+      {
+        'Authorization' => "Bearer #{access_token}"
+      }.merge(headers)
     end
   end
 end
