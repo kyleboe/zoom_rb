@@ -95,9 +95,9 @@ module Zoom
       end
 
       def user_settings_update(*args)
-        # TODO: implement user_settings_update
-        # options = Utils.extract_options!(args)
-        raise Zoom::NotImplemented, 'user_settings_update is not yet implemented'
+        options = Zoom::Params.new(Utils.extract_options!(args))
+        options.require(%i[user_id])
+        Utils.parse_response self.class.patch("/users/#{options[:user_id]}/settings", body: options.except(:user_id), headers: request_headers)
       end
 
       def user_status_update(*args)
