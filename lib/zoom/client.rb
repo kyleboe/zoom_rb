@@ -6,6 +6,7 @@ module Zoom
   class Client
     include HTTParty
     include Actions::Account
+    include Actions::Data
     include Actions::Group
     include Actions::M323Device
     include Actions::User
