@@ -8,11 +8,13 @@ module Zoom
       # Auth_token is sent in the header
       # (auth_code, auth_token, redirect_uri) -> oauth API
       # Returns (access_token, refresh_token)
+      # auth_token is optional, it will be set to base64(apiKey:apiSecret) by default
       #
       # (auth_token, refresh_token) -> oauth refresh API
       # Returns (access_token, refresh_token)
       #
       def initialize(config)
+        config[:auth_token] ||= Base64.strict_encode64("#{Zoom.configuration.api_key}:#{Zoom.configuration.api_secret}")
         Zoom::Params.new(config).permit(:auth_token, :auth_code, :redirect_uri, :access_token, :refresh_token, :timeout)
         Zoom::Params.new(config).require_one_of(:access_token, :refresh_token, :auth_token)
         if (config.keys & [:auth_code, :redirect_uri]).any?

@@ -40,19 +40,21 @@ https://zoom.us/oauth/authorize?response_type=code&client_id=7lstjKqdwjett_kwjwD
 
 Which will result in a redirect to your app with code in the url params
 
-then use this code to get an access token and a refresh token, the auth token is base64(client_id:client_secret).
+then use this code to get an access token and a refresh token.
+
+You can optionally pass in the auth token, it will default to base64(Zoom.configuration.api_key:Zoom.configuration.api_secret).
 
 ```ruby
 require 'zoom_rb'
 
-client = Zoom::Client::OAuth.new(auth_token: auth_token, auth_code: auth_code, timeout: 15).auth
+client = Zoom::Client::OAuth.new(auth_code: auth_code, redirect_uri: redirect_uri, timeout: 15).auth
 
 zoom_client = Zoom::Client::OAuth.new(access_token: 'xxx', timeout: 15)
 ```
 
 You can also make a call to refresh with auth using an auth_token and a refresh_token
 ```ruby
-client = Zoom::Client::OAuth.new(auth_token: auth_token, refresh_token: refresh_token).auth
+client = Zoom::Client::OAuth.new(refresh_token: refresh_token).auth
 
 zoom_client = Zoom::Client::OAuth.new(access_token: 'xxx', timeout: 15)
 ```
