@@ -1,0 +1,16 @@
+{
+    "uuid": "Yfuw7RVHRnRuf/jTv14I0Q==",
+    "id": 123456789,
+    "host_id": "0Bo70M0RRaerVET5nO57mA",
+    "type": 9,
+    "topic": "test webinar details",
+    "user_name": "Webinar User",
+    "user_email": "zoomwebinar@zoom.us",
+    "start_time": "2019-07-18T15:12:32Z",
+    "end_time": "2019-07-18T19:57:42Z",
+    "duration": 286,
+    "total_minutes": 3479,
+    "participants_count": 20,
+    "tracking_fields": [],
+    "dept": "Webinar_dept"
+}

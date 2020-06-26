@@ -40,9 +40,9 @@ module Zoom
       end
 
       def webinar_details_report(*args)
-        # TODO: implement webinar_details_report
-        # params = Zoom::Params.new(Utils.extract_options!(args))
-        raise Zoom::NotImplemented, 'webinar_details_report is not yet implemented'
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id).permit(%i[page_size next_page_token])
+        Utils.parse_response self.class.get("/report/webinars/#{params[:id]}", query: params.except(:id), headers: request_headers)
       end
 
       def webinar_participants_report(*args)
