@@ -91,6 +91,12 @@ module Zoom
         Utils.parse_response self.class.get("/users/#{params[:id]}/settings", query: params.except(:id), headers: request_headers)
       end
 
+      def user_password_update(*args)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(%i[user_id password])
+        Utils.parse_response self.class.put("/users/#{params[:user_id]}/password", body: { password: params[:password] }.to_json,  headers: request_headers)
+      end
+
       def user_settings_update(*args)
         # TODO: implement user_settings_update
         # params = Zoom::Params.new(Utils.extract_options!(args))
