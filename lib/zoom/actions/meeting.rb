@@ -3,6 +3,13 @@
 module Zoom
   module Actions
     module Meeting
+
+      def meeting_invitation(*args)
+        options = Zoom::Params.new(Utils.extract_options!(args))
+        options.require(%i[meeting_id])
+        Utils.parse_response self.class.get("/meeting/#{options[:meeting_id]}/meetings", headers: request_headers)
+      end
+
       # List all the scheduled meetings on Zoom.
       def meeting_list(*args)
         options = Zoom::Params.new(Utils.extract_options!(args))
