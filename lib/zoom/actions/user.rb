@@ -28,7 +28,7 @@ module Zoom
       def user_update(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:id).permit(%i[first_name last_name type pmi timezone dept vanity_name host_key cms_user_id])
-        Utils.parse_response self.class.patch("/users/#{params[:id]}", body: params.except(:id), headers: request_headers)
+        Utils.parse_response self.class.patch("/users/#{params[:id]}", body: params.except(:id).to_json, headers: request_headers)
       end
 
       def user_delete(*args)
