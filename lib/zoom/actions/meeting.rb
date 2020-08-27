@@ -78,6 +78,18 @@ module Zoom
         Utils.parse_response self.class.post("/meetings/#{options[:meeting_id]}/registrants", body: options.except(:meeting_id).to_json, headers: request_headers)
       end
 
+      def list_meeting_registrants(*args)
+        options = Zoom::Params.new(Utils.extract_options!(args))
+        options.require(%i[meeting_id])
+        Utils.parse_response self.class.get("/meetings/#{options[:meeting_id]}/registrants", body: options.except(:meeting_id).to_json, headers: request_headers)
+      end
+
+      def update_meeting_registrant_status(*args)
+        options = Zoom::Params.new(Utils.extract_options!(args))
+        options.require(%i[action registrants])
+        Utils.parse_response self.class.put("/meetings/#{options[:meeting_id]}/registrants/status", body: options.except(:meeting_id).to_json, headers: request_headers)
+      end
+
       # Register for a meeting.
       def meeting_registrant_questions(*args)
         options = Zoom::Params.new(Utils.extract_options!(args))
