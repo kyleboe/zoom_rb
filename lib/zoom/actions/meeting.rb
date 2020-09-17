@@ -75,7 +75,7 @@ module Zoom
       def meeting_register(*args)
         options = Zoom::Params.new(Utils.extract_options!(args))
         options.require(%i[meeting_id email first_name last_name])
-        Utils.parse_response self.class.post("/meetings/#{options[:meeting_id]}/registrants", body: options.except(:meeting_id).to_json, headers: request_headers)
+        Utils.parse_response self.class.post("/meetings/#{options[:meeting_id]}/registrants", query: options.slice(:occurrence_ids), body: options.except(:meeting_id, :occurence_ids).to_json, headers: request_headers)
       end
 
       def list_meeting_registrants(*args)
