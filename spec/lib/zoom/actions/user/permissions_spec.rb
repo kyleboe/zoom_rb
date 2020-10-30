@@ -17,7 +17,7 @@ describe Zoom::Actions::User do
                     headers: { 'Content-Type' => 'application/json' })
       end
 
-      it 'requires id param' do
+      it 'requires user_id param' do
         expect { zc.user_permissions(filter_key(args, :user_id)) }.to raise_error(Zoom::ParameterMissing, '[:user_id]')
       end
 
