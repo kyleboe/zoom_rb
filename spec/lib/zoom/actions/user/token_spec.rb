@@ -23,7 +23,7 @@ describe Zoom::Actions::User do
       end
 
       it 'allows type' do
-        args[:type] = 'login'
+        args[:type] = 'token'
         expect { zc.user_token(args) }.not_to raise_error
       end
 
