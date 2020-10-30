@@ -106,7 +106,7 @@ module Zoom
       def user_permissions(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:user_id)
-        Utils.parse_response self.class.get("/users/#{params[:user_id]}/permissions", query: params.except(:user_id), headers: request_headers)
+        Utils.parse_response self.class.get("/users/#{params[:user_id]}/permissions", headers: request_headers)
       end
     end
   end
