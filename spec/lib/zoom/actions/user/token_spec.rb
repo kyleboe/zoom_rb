@@ -22,7 +22,7 @@ describe Zoom::Actions::User do
           .to raise_error(Zoom::ParameterMissing, '[:user_id]')
       end
 
-      it 'allowes type' do
+      it 'allows type' do
         args[:type] = 'login'
         expect { zc.user_token(args) }.not_to raise_error
       end
