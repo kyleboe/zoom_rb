@@ -99,8 +99,8 @@ module Zoom
 
       def user_token(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id)
-        Utils.parse_response self.class.get("/users/#{params[:id]}/token", headers: request_headers)
+        params.require(:id).permit(%i[type ttl])
+        Utils.parse_response self.class.get("/users/#{params[:id]}/token", query: params.except(:id), headers: request_headers)
       end
     end
   end
