@@ -102,6 +102,12 @@ module Zoom
         params.require(:id).permit(%i[type ttl])
         Utils.parse_response self.class.get("/users/#{params[:id]}/token", query: params.except(:id), headers: request_headers)
       end
+
+      def user_permissions(*args)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id).permit(%i[type ttl])
+        Utils.parse_response self.class.get("/users/#{params[:id]}/permissions", query: params.except(:id), headers: request_headers)
+      end
     end
   end
 end
