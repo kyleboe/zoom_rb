@@ -96,6 +96,12 @@ module Zoom
         params.require(:id).permit(%i[page_size next_page_token mc trash from to trash_type])
         Utils.parse_response self.class.get("/users/#{params[:id]}/recordings", query: params.except(:id), headers: request_headers)
       end
+
+      def user_token(*args)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id)
+        Utils.parse_response self.class.get("/users/#{params[:id]}/token", headers: request_headers)
+      end
     end
   end
 end
