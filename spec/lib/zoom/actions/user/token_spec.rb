@@ -4,21 +4,32 @@ require 'spec_helper'
 
 describe Zoom::Actions::User do
   let(:zc) { zoom_client }
-  let(:args) { { id: 'ufR9342pRyf8ePFN92dttQ' } }
+  let(:args) { { user_id: 'ufR9342pRyf8ePFN92dttQ' } }
 
   describe '#user_token action' do
     context 'with a valid response' do
       before :each do
         stub_request(
           :get,
-          zoom_url("/users/#{args[:id]}/token")
+          zoom_url("/users/#{args[:user_id]}/token")
         ).to_return(status: 200,
                     body: json_response('user', 'token'),
                     headers: { 'Content-Type' => 'application/json' })
       end
 
       it 'requires id param' do
-        expect { zc.user_token(filter_key(args, :id)) }.to raise_error(Zoom::ParameterMissing, '[:id]')
+        expect { zc.user_token(filter_key(args, :user_id)) }
+          .to raise_error(Zoom::ParameterMissing, '[:user_id]')
+      end
+
+      it 'allowes type' do
+        args[:type] = 'login'
+        expect { zc.user_token(args) }.not_to raise_error
+      end
+
+      it 'allowes login_type' do
+        args[:ttl] = 30
+        expect { zc.user_token(args) }.not_to raise_error
       end
 
       it 'returns a hash' do
@@ -36,7 +47,7 @@ describe Zoom::Actions::User do
       before :each do
         stub_request(
           :get,
-          zoom_url("/users/#{args[:id]}/token")
+          zoom_url("/users/#{args[:user_id]}/token")
         ).to_return(status: 404,
                     body: json_response('error', 'validation'),
                     headers: { 'Content-Type' => 'application/json' })

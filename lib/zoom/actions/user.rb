@@ -99,14 +99,14 @@ module Zoom
 
       def user_token(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id).permit(%i[type ttl])
-        Utils.parse_response self.class.get("/users/#{params[:id]}/token", query: params.except(:id), headers: request_headers)
+        params.require(:user_id).permit(%i[type ttl])
+        Utils.parse_response self.class.get("/users/#{params[:user_id]}/token", query: params.except(:user_id), headers: request_headers)
       end
 
       def user_permissions(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id).permit(%i[type ttl])
-        Utils.parse_response self.class.get("/users/#{params[:id]}/permissions", query: params.except(:id), headers: request_headers)
+        params.require(:user_id)
+        Utils.parse_response self.class.get("/users/#{params[:user_id]}/permissions", query: params.except(:user_id), headers: request_headers)
       end
     end
   end

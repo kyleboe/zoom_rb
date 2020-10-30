@@ -4,21 +4,21 @@ require 'spec_helper'
 
 describe Zoom::Actions::User do
   let(:zc) { zoom_client }
-  let(:args) { { id: 'ufR9342pRyf8ePFN92dttQ' } }
+  let(:args) { { user_id: 'ufR9342pRyf8ePFN92dttQ' } }
 
   describe '#user_permissions action' do
     context 'with a valid response' do
       before :each do
         stub_request(
           :get,
-          zoom_url("/users/#{args[:id]}/permissions")
+          zoom_url("/users/#{args[:user_id]}/permissions")
         ).to_return(status: 200,
                     body: json_response('user', 'permissions'),
                     headers: { 'Content-Type' => 'application/json' })
       end
 
       it 'requires id param' do
-        expect { zc.user_permissions(filter_key(args, :id)) }.to raise_error(Zoom::ParameterMissing, '[:id]')
+        expect { zc.user_permissions(filter_key(args, :user_id)) }.to raise_error(Zoom::ParameterMissing, '[:user_id]')
       end
 
       it 'returns a hash' do
@@ -38,7 +38,7 @@ describe Zoom::Actions::User do
       before :each do
         stub_request(
           :get,
-          zoom_url("/users/#{args[:id]}/permissions")
+          zoom_url("/users/#{args[:user_id]}/permissions")
         ).to_return(status: 404,
                     body: json_response('error', 'validation'),
                     headers: { 'Content-Type' => 'application/json' })
