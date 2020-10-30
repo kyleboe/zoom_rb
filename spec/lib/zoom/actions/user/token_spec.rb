@@ -27,7 +27,7 @@ describe Zoom::Actions::User do
         expect { zc.user_token(args) }.not_to raise_error
       end
 
-      it 'allowes login_type' do
+      it 'allows time to live' do
         args[:ttl] = 30
         expect { zc.user_token(args) }.not_to raise_error
       end
