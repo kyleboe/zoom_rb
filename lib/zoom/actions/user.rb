@@ -5,7 +5,7 @@ module Zoom
     module User
       def user_list(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.permit(%i[status page_size page_number])
+        params.permit(%i[status page_size page_number next_page_token])
         response = self.class.get('/users', query: params, headers: request_headers)
         Utils.parse_response(response)
       end
