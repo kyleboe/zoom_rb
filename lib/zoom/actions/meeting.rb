@@ -28,7 +28,7 @@ module Zoom
       def meeting_get_recordings(*args)
         options = Zoom::Params.new(Utils.extract_options!(args))
         options.require(%i[meeting_id])
-        Utils.parse_response self.class.get("/meetings/#{options[:meeting_id]}/recordings", headers: request_headers)
+        Utils.parse_response self.class.get("/meetings/#{options[:meeting_id]}/recordings?include_fields=download_access_token&ttl=60", headers: request_headers)
       end
       
       # Update meeting info on Zoom via meeting ID.
