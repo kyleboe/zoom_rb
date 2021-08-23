@@ -25,7 +25,7 @@ module Zoom
         Utils.parse_response self.class.get("/users/#{params[:id]}", query: params.except(:id), headers: request_headers)
       end
 
-      def user_get_recordings(*args)
+      def user_recordings_get(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:id).permit(%i[page_size next_page_token from to])
         Utils.parse_response self.class.get("/users/#{params[:id]}/recordings", query: params.except(:id), headers: request_headers)
@@ -102,7 +102,7 @@ module Zoom
 
       def user_settings_update(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id).permit!
+        params.require(:id).permit(recording: [:recording_disclaimer, :cloud_recording, :record_audio_file], email_notification: [:cloud_recording_available_reminder])
         Utils.parse_response self.class.patch("/users/#{params[:id]}/settings", body: params.except(:id).to_json, headers: request_headers)
       end
 
