@@ -25,6 +25,12 @@ module Zoom
         Utils.parse_response self.class.get("/users/#{params[:id]}", query: params.except(:id), headers: request_headers)
       end
 
+      def user_get_recordings(*args)
+        params = Zoom::Params.new(Utils.extract_options!(args))
+        params.require(:id).permit(%i[page_size next_page_token from to])
+        Utils.parse_response self.class.get("/users/#{params[:id]}/recordings", query: params.except(:id), headers: request_headers)
+      end
+
       def user_update(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
         params.require(:id).permit(%i[first_name last_name type pmi timezone dept vanity_name host_key cms_user_id])
