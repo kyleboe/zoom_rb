@@ -24,6 +24,13 @@ module Zoom
         options.require(%i[meeting_id])
         Utils.parse_response self.class.get("/meetings/#{options[:meeting_id]}", headers: request_headers)
       end
+
+      def meeting_get_past_instances(*args)
+        options = Zoom::Params.new(Utils.extract_options!(args))
+        options.require(%i[meeting_id])
+        Utils.parse_response self.class.get("/past_meetings/#{options[:meeting_id]}/instances", headers: request_headers)
+      end
+
       
        def meeting_get_invitation(*args)
         options = Zoom::Params.new(Utils.extract_options!(args))
