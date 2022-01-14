@@ -32,22 +32,6 @@ module Zoom
         'Content-Type' => 'application/json',
       }
     end
-
-    def oauth_request_headers
-      {
-        'Authorization' => "Basic #{auth_token}"
-      }.merge(headers)
-    end
-
-    def request_headers
-      {
-        'Authorization' => "Bearer #{access_token}"
-      }.merge(headers)
-    end
-
-    def auth_token
-      Base64.encode64("#{Zoom.configuration.api_key}:#{Zoom.configuration.api_secret}").delete("\n")
-    end
   end
 end
 

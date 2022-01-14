@@ -4,7 +4,6 @@ require 'jwt'
 module Zoom
   class Client
     class JWT < Zoom::Client
-
       def initialize(config)
         Zoom::Params.new(config).require(:api_key, :api_secret)
         config.each { |k, v| instance_variable_set("@#{k}", v) }
@@ -15,6 +14,11 @@ module Zoom
         ::JWT.encode({ iss: @api_key, exp: Time.now.to_i + @timeout }, @api_secret, 'HS256', { typ: 'JWT' })
       end
 
+      def request_headers
+        {
+          'Authorization' => "Bearer #{access_token}"
+        }.merge(headers)
+      end
     end
   end
 end

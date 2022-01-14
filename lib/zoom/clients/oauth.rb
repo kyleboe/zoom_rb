@@ -23,6 +23,16 @@ module Zoom
         self.class.default_timeout(@timeout || 20)
       end
 
+      def auth_token
+        Base64.encode64("#{Zoom.configuration.api_key}:#{Zoom.configuration.api_secret}").delete("\n")
+      end
+
+      def request_headers
+        {
+          'Authorization' => "Basic #{auth_token}"
+        }.merge(headers)
+      end
+
       def auth
         refresh_token ? refresh : oauth
       end
