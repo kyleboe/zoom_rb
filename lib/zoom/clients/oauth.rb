@@ -29,7 +29,7 @@ module Zoom
 
       def request_headers
         {
-          'Authorization' => "Basic #{auth_token}"
+          'Authorization' => access_token ? "Bearer #{access_token}" : "Basic #{auth_token}"
         }.merge(headers)
       end
 

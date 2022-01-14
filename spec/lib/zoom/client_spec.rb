@@ -116,7 +116,7 @@ describe Zoom::Client do
       end
 
       it 'has the basic auth authorization header' do
-        expect(zc.oauth_request_headers['Authorization']).to eq("Basic eHh4Onh4eA==")
+        expect(zc.request_headers['Authorization']).to eq("Basic eHh4Onh4eA==")
       end
     end
   end
