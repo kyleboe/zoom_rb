@@ -8,7 +8,7 @@ RSpec.describe Zoom::Params do
     let(:params) { Zoom::Params.new(foo: :bar, baz: :bang) }
 
     it 'does not raise an error when required keys are present' do
-      expect { params.require(:foo) }.not_to raise_error(Zoom::ParameterMissing)
+      expect { params.require(:foo) }.not_to raise_error
     end
 
     it 'does raise an error when required keys are missing' do
@@ -32,11 +32,11 @@ RSpec.describe Zoom::Params do
     end
 
     it 'does not raise an error when one of the required keys are missing' do
-      expect { params.require_one_of(:foo) }.not_to raise_error(Zoom::ParameterMissing)
+      expect { params.require_one_of(:foo) }.not_to raise_error
     end
 
     it 'does not raise an error when one of the required keys are missing' do
-      expect { params.require_one_of(:foo, :bebop) }.not_to raise_error(Zoom::ParameterMissing)
+      expect { params.require_one_of(:foo, :bebop) }.not_to raise_error
     end
   end
 
@@ -44,11 +44,11 @@ RSpec.describe Zoom::Params do
     let(:params) { Zoom::Params.new(foo: true, bar: :baz ) }
 
     it 'does not raise an error when permitted keys are present' do
-      expect { params.require(:foo).permit(:bar) }.not_to raise_error(Zoom::ParameterNotPermitted)
+      expect { params.require(:foo).permit(:bar) }.not_to raise_error
     end
 
     it 'does not raise an error when permitted keys are not present' do
-      expect { params.require(:foo).permit(:bar, :bang) }.not_to raise_error(Zoom::ParameterNotPermitted)
+      expect { params.require(:foo).permit(:bar, :bang) }.not_to raise_error
     end
 
     context 'raises an error' do

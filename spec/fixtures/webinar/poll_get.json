@@ -1,0 +1,13 @@
+{
+    "id": "cdjfhdsdfd",
+    "status": "ended",
+    "title": "Learn something new",
+    "questions": [{
+        "name": "How are you?",
+        "type": "multiple",
+        "answers": [
+            "Good",
+            "Not so good"
+        ]
+    }]
+}

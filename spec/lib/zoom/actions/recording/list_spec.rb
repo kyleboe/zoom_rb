@@ -13,7 +13,7 @@ describe Zoom::Actions::Recording do
         zoom_url("/users/#{args[:user_id]}/recordings")
       ).to_return(
         status: 200,
-        body: json_response('recording_list'),
+        body: json_response('recording', 'list'),
         headers: { 'Content-Type' => 'application/json' }
       )
     end

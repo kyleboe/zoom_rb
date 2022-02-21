@@ -1,0 +1,15 @@
+{
+  "total_records": 2,
+  "callout_countries": [
+    {
+      "id": "US",
+      "name": "United States",
+      "code": "1"
+    },
+    {
+      "id": "CA",
+      "name": "Canada",
+      "code": "1"
+    }
+  ]
+}

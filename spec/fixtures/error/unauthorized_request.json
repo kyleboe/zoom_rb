@@ -1,0 +1,4 @@
+{
+  "code": 400,
+  "message": "Unauthorized request. You do not have permission to access this user’s channel information."
+}

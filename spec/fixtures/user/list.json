@@ -5,19 +5,23 @@
   "total_records": 1,
   "users": [
     {
-      "id": "foobar",
-      "first_name": "Zoomie",
-      "last_name": "Userton",
-      "email": "foo@bar.com",
-      "type": 1,
-      "pmi": "string",
-      "timezone": "string",
-      "dept": "string",
-      "created_at": "2018-09-12T20:35:07.578Z",
-      "last_login_time": "2018-09-12T20:35:07.578Z",
-      "last_client_version": "string",
-      "group_ids": ["string"],
-      "im_group_ids": ["string"]
+      "id": "z8yAAAAA8bbbQ",
+      "first_name": "Melina",
+      "last_name": "Ghimire",
+      "email": "mel@jfggdhfhdfj.djfhdsfh",
+      "type": 2,
+      "pmi": 581111112,
+      "timezone": "America/Los_Angeles",
+      "verified": 1,
+      "dept": "",
+      "created_at": "2018-11-15T01:10:08Z",
+      "last_login_time": "2019-09-13T21:08:52Z",
+      "last_client_version": "4.4.55383.0716(android)",
+      "pic_url": "https://lh4.googleusercontent.com/-someurl/photo.jpg",
+      "im_group_ids": [
+        "Abdsjkfhdhfj"
+      ],
+      "status": "active"
     }
   ]
 }

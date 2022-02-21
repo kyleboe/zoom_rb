@@ -1,0 +1,7 @@
+{
+  "on_demand": false,
+  "password": "",
+  "recording_authentication": false,
+  "share_recording": "publicly",
+  "viewer_download": false
+}

@@ -45,7 +45,7 @@ describe Zoom::Utils do
         bar: Time.utc(2000, 'jan', 1, 20, 15, 1)
       }
       expect(
-        Utils.process_datetime_params!(:bar, args)
+        Utils.process_datetime_params!(args)
       ).to eq({ foo: 'foo',
                 bar: '2000-01-01T20:15:01Z' })
     end

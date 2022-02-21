@@ -1,0 +1,14 @@
+{
+  "internal_numbers": [
+    {
+      "number": "+16466661110",
+      "display_number": "+1 646 666 1110",
+      "country": "US",
+      "type": 0,
+      "labels": "SIP-Internal",
+      "languages": "en-GB",
+      "visible": true,
+      "allow_join": true
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "page_size": 1,
+  "total_records": 1,
+  "next_page_token": "string",
+  "internal_numbers": [
+    {
+      "number": "45345545",
+      "display_number": "+1 888 888 000",
+      "country": "US",
+      "visable": true,
+      "type": 1,
+      "labels": "string description of phone number",
+      "languages": "en-US"
+    }
+  ]
+}

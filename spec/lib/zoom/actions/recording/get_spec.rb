@@ -6,30 +6,30 @@ describe Zoom::Actions::Recording do
   let(:zc) { zoom_client }
   let(:args) { { user_id: 'kEFomHcIRgqxZT8D086O6A', meeting_id: 933560800 } }
 
-  describe '#recording_get action' do
+  describe '#meeting_recording_get action' do
     before :each do
       stub_request(
         :get,
         zoom_url("/meetings/#{args[:meeting_id]}/recordings")
       ).to_return(
         status: 200,
-        body: json_response('recording_get'),
+        body: json_response('recording', 'get'),
         headers: { 'Content-Type' => 'application/json' }
       )
     end
 
     it "requires a 'meeting_id' argument" do
       expect {
-        zc.recording_get(filter_key(args, :meeting_id))
+        zc.meeting_recording_get(filter_key(args, :meeting_id))
       }.to raise_error(Zoom::ParameterMissing)
     end
 
     it 'returns a hash' do
-      expect(zc.recording_get(args)).to be_kind_of(Hash)
+      expect(zc.meeting_recording_get(args)).to be_kind_of(Hash)
     end
 
     it 'returns id and attributes' do
-      res = zc.recording_get(args)
+      res = zc.meeting_recording_get(args)
 
       expect(res['uuid']).to eq("ucc69C82Q5mTNyCRWE29Aw==")
       expect(res['id']).to eq(args[:meeting_id])
@@ -44,15 +44,7 @@ describe Zoom::Actions::Recording do
     end
 
     it "returns 'recording_files' Array" do
-      expect(zc.recording_get(args)['recording_files']).to be_kind_of(Array)
-    end
-  end
-
-  describe '#recording_get! action' do
-    it 'raises NoMethodError exception' do
-      expect {
-        @zc.recording_get!(@args)
-      }.to raise_error(NoMethodError)
+      expect(zc.meeting_recording_get(args)['recording_files']).to be_kind_of(Array)
     end
   end
 end

@@ -3,24 +3,22 @@
 module Zoom
   module Actions
     module Recording
-      def recording_list(*args)
-        options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(%i[user_id])
-        Utils.process_datetime_params!(%i[from to], options)
-        Utils.parse_response self.class.get("/users/#{options[:user_id]}/recordings", query: options.except(:user_id), headers: request_headers)
-      end
+      extend Zoom::Actions
 
-      def recording_get(*args)
-        options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(%i[meeting_id])
-        Utils.parse_response self.class.get("/meetings/#{options[:meeting_id]}/recordings", query: options.except(:meeting_id), headers: request_headers)
-      end
+      RECORDING_SETTINGS_KEYS = %i[share_recording recording_authentication
+                                   authentication_option authentication_domains viewer_download password
+                                   on_demand approval_type send_email_to_host show_social_share_buttons].freeze
 
-      def recording_delete(*args)
-        options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(%i[meeting_id recording_id])
-        Utils.parse_response self.class.delete("/meetings/#{options[:meeting_id]}/recordings/#{options[:recording_id]}",  query: options.except(:meeting_id, :recording_id), headers: request_headers)
-      end
+      get 'recording_list', '/users/:user_id/recordings'
+
+      get 'meeting_recording_get', '/meetings/:meeting_id/recordings'
+
+      get 'meeting_recording_settings_get', '/meetings/:meeting_id/recordings/settings'
+
+      patch 'meeting_recording_settings_update', '/meetings/:meeting_id/recordings/settings',
+        permit: RECORDING_SETTINGS_KEYS
+
+      delete 'meeting_recording_file_delete', '/meetings/:meeting_id/recordings/:recording_id'
     end
   end
 end

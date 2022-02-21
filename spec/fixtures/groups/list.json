@@ -1,0 +1,15 @@
+{
+  "total_records": 2,
+  "groups": [
+    {
+      "id": "0",
+      "name": "String",
+      "total_members": 10
+    },
+    {
+      "id": "1",
+      "name": "String",
+      "total_members": 20
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "total_records": 235,
+  "page_size": 50,
+  "next_page_token": 555,
+  "channels": [
+    {
+      "id": "123456789",
+      "name": "Name for this channel",
+      "type": 2
+    },
+    {
+      "id": "123456790",
+      "name": "Second Name for this channel",
+      "type": 3
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "plan_base": [{
+    "type": "string",
+    "hosts": 10,
+    "usage": 5
+  }],
+  "plan_webinar": [{
+    "type": "string",
+    "hosts": 10,
+    "usage": 5
+  }],
+  "plan_large_meeting": [{
+    "type": "string",
+    "hosts": 10,
+    "usage": 5
+  }],
+  "plan_zoom_rooms": [{
+    "type": "string",
+    "hosts": 10,
+    "usage": 5
+  }],
+  "plan_recording": {
+    "type": "string",
+    "free_storage": "string",
+    "free_storage_usage": "string",
+    "plan_storage": "string",
+    "plan_storage_usage": "string",
+    "plan_storage_exceed": "string"
+  }
+}

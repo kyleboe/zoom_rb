@@ -18,11 +18,9 @@ Or install it yourself as:
 
 ## Usage
 
-The Zoom API uses OAuth or JWT to [Authenticate](https://marketplace.zoom.us/docs/api-reference/Authentication) API request. By defaut, a JWT client will be used.
+The Zoom API uses OAuth or JWT to [Authenticate](https://marketplace.zoom.us/docs/api-reference/Authentication) API request. By default, a JWT client will be used.
 
 ```ruby
-require 'zoom_rb'
-
 Zoom.configure do |c|
   c.api_key = 'xxx'
   c.api_secret = 'xxx'
@@ -40,14 +38,12 @@ https://zoom.us/oauth/authorize?response_type=code&client_id=7lstjKqdwjett_kwjwD
 
 Which will result in a redirect to your app with code in the url params
 
-then use this code to get an access token and a refresh token, the auth token is base64(client_id:client_secret).
+then use this code to get an access token and a refresh token.
 
 ```ruby
-require 'zoom_rb'
+auth = Zoom::Client::OAuth.new(auth_code: auth_code, redirect_uri: redirect_uri, timeout: 15).auth
 
-client = Zoom::Client::OAuth.new(auth_token: auth_token, auth_code: auth_code, timeout: 15).auth
-
-zoom_client = Zoom::Client::OAuth.new(access_token: 'xxx', timeout: 15)
+zoom_client = Zoom::Client::OAuth.new(access_token: auth['access_token'], timeout: 15)
 ```
 
 You can also make a call to refresh with auth using an auth_token and a refresh_token

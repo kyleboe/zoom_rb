@@ -9,7 +9,7 @@ jobs:
       CC_TEST_REPORTER_ID: c6c77975186cfe10e41d9548e9b4a4648f87b56cdbb70bd3896a5a58abf08421
     docker:
       # specify the version you desire here
-       - image: circleci/ruby:2.5.1-node-browsers
+       - image: circleci/ruby:2.7-node-browsers
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images

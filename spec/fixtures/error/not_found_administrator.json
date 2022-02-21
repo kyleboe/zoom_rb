@@ -1,0 +1,4 @@
+{
+  "code": 400,
+  "message": "Only an account administrator can change email."
+}

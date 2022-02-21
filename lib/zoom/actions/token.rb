@@ -3,19 +3,30 @@
 module Zoom
   module Actions
     module Token
-      def access_tokens(*args)
-        options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(%i[auth_code redirect_uri])
-        response = self.class.post("/oauth/token?grant_type=authorization_code&code=#{options[:auth_code]}&redirect_uri=#{options[:redirect_uri]}", headers: oauth_request_headers, base_uri: 'https://zoom.us/')
-        Utils.parse_response(response)
-      end
+      extend Zoom::Actions
 
-      def refresh_tokens(*args)
-        options = Zoom::Params.new(Utils.extract_options!(args))
-        options.require(%i[refresh_token])
-        response = self.class.post("/oauth/token?grant_type=refresh_token&refresh_token=#{options[:refresh_token]}", headers: oauth_request_headers, base_uri: 'https://zoom.us/')
-        Utils.parse_response(response)
-      end
+      post 'access_tokens',
+        '/oauth/token',
+        oauth: true,
+        require: %i[grant_type code redirect_uri],
+        permit: :code_verifier,
+        args_to_params: { auth_code: :code }
+
+      post 'refresh_tokens',
+        '/oauth/token',
+        oauth: true,
+        require: %i[grant_type refresh_token]
+
+      post 'data_compliance', '/oauth/data/compliance',
+        oauth: true,
+        require: %i[
+          client_id user_id account_id deauthorization_event_received compliance_completed
+        ]
+
+      post 'revoke_tokens', '/oauth/revoke',
+        oauth: true,
+        require: :token,
+        args_to_params: { access_token: :token }
     end
   end
 end

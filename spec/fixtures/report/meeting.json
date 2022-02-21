@@ -1,0 +1,19 @@
+{
+  "uuid": "sfsdfsdfc6122222d",
+  "id": 1000000,
+  "type": 2,
+  "topic": "Awesome meeting",
+  "user_name": "officia",
+  "user_email": "officia@sdhgdfgh.fsdfs",
+  "start_time": "2019-07-14T09:05:19.754Z",
+  "end_time": "2019-08-14T09:05:19.754Z",
+  "duration": 11,
+  "total_minutes": 11,
+  "participants_count": 4,
+  "tracking_fields": [
+    {
+      "field": "Meeting Purpose",
+      "value": "Sales"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+    "total_records": 1,
+    "domains": [{
+        "domain": "string",
+        "status": "string"
+    }]
+}

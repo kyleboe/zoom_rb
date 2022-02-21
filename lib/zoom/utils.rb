@@ -17,7 +17,8 @@ module Zoom
         code = response['code']
 
         raise AuthenticationError, build_error(response) if code == 124
-        raise Error, build_error(response) if code >= 300
+        error_hash = build_error(response)
+        raise Error.new(error_hash, error_hash) if code >= 300
       end
 
       def build_error(response)
@@ -31,7 +32,8 @@ module Zoom
       end
 
       def extract_options!(array)
-        array.last.is_a?(::Hash) ? array.pop : {}
+        params = array.last.is_a?(::Hash) ? array.pop : {}
+        process_datetime_params!(params)
       end
 
       def validate_password(password)
@@ -39,14 +41,16 @@ module Zoom
         raise(Error , 'Invalid Password') unless password[password_regex].nil?
       end
 
-      def process_datetime_params!(params, options)
-        params = [params] unless params.is_a? Array
-        params.each do |param|
-          if options[param] && options[param].kind_of?(Time)
-            options[param] = options[param].strftime('%FT%TZ')
+      def process_datetime_params!(params)
+        params.each do |key, value|
+          case key
+          when Symbol, String
+            params[key] = value.is_a?(Time) ? value.strftime('%FT%TZ') : value
+          when Hash
+            process_datetime_params!(params[key])
           end
         end
-        options
+        params
       end
     end
   end

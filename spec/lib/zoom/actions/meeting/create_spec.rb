@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe Zoom::Actions::Meeting do
   let(:zc) { zoom_client }
-  let(:args) { { topic: 'Zoom Meeting Topic', start_time: '2020-05-05T21:00:00Z', timezone: 'America/New_York', duration: 30, type: 2, user_id: 'r55v2FgSTVmDmVot18DX3A' } }
+  let(:args) { { topic: 'Zoom Meeting Topic', start_time: '2020-05-05T21:00:00Z', timezone: 'America/New_York', duration: 30, type: 2, user_id: 'r55v2FgSTVmDmVot18DX3A', template_id: 'template_id' } }
   let(:response) { zc.meeting_create(args) }
 
   describe '#meeting_create action' do

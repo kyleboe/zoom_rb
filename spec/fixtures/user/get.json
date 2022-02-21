@@ -1,23 +1,37 @@
 {
-  "id": "ufR9342pRyf8ePFN92dttQ",
-  "first_name": "Zoomie",
-  "last_name": "Userton",
-  "email": "foo@bar.com",
-  "type": 1,
-  "pmi": "string",
-  "timezone": "string",
-  "dept": "string",
-  "created_at": "2018-09-25T23:13:05.014Z",
-  "last_login_time": "2018-09-25T23:13:05.014Z",
-  "last_client_version": "string",
-  "vanity_url": "string",
-  "personal_meeting_url": "string",
-  "verified": 0,
-  "pic_url": "string",
-  "cms_user_id": "string",
-  "account_id": "string",
-  "host_key": "string",
-  "use_pmi": true,
-  "group_ids": ["string"],
-  "im_group_ids": ["string"]
+  "created_at":"2018-11-15T01:10:08Z",
+  "custom_attributes": [
+    {
+      "key": "cb3674544gexq",
+      "name": "Country of Citizenship",
+      "value": "Nepal"
+    }
+  ],
+  "id": "z8dsdsdsdsdCfp8uQ",
+  "first_name": "Harry",
+  "last_name": "Grande",
+  "email": "harryg@dfkjdslfjkdsfjkdsf.fsdfdfd",
+  "type": 2,
+  "role_name": "Owner",
+  "pmi": 100000000,
+  "use_pmi": false,
+  "personal_meeting_url": "https://zoom.us/j/6352635623323434343443",
+  "timezone": "America/Los_Angeles",
+  "verified": 1,
+  "dept": "",
+  "created_at": "2018-11-15T01:10:08Z",
+  "last_login_time": "2019-09-13T21:08:52Z",
+  "last_client_version": "4.4.55383.0716(android)",
+  "pic_url": "https://lh4.googleusercontent.com/-hsgfhdgsfghdsfghfd-photo.jpg",
+  "host_key": "0000",
+  "jid": "hghghfghdfghdfhgh@xmpp.zoom.us",
+  "group_ids": [],
+  "im_group_ids": [
+    "CcSAAAAAAABBBVoQ"
+  ],
+  "account_id": "EAAAAAbbbbbCCCCHMA",
+  "language": "en-US",
+  "phone_country": "USA",
+  "phone_number": "00000000",
+  "status": "active"
 }
