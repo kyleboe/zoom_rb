@@ -1,3 +1,8 @@
+# 1.1.2
+
+### Fixes
+* Fix error when response passed to `Utils#raise_if_error!` is a string - [#421](https://github.com/hintmedia/zoom_rb/pull/421)
+
 # 1.1.1
 
 ### Fixes
