@@ -47,6 +47,10 @@ module Zoom
       # Register for a meeting.
       patch 'meeting_registrant_questions', '/meeting/:meeting_id/registrants/questions'
 
+      # List users that have registered for a meeting.
+      get 'list_meeting_registrants', '/meetings/:meeting_id/registrants',
+        permit: %i[occurrence_id status page_size next_page_token]
+
       # Retrieve ended meeting details
       get 'past_meeting_details', '/past_meetings/:meeting_uuid'
 
