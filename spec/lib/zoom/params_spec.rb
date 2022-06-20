@@ -98,4 +98,22 @@ RSpec.describe Zoom::Params do
       expect { params.permit_value(:baz, values) }.to raise_error(Zoom::ParameterValueNotPermitted, "#{:baz.to_s}: #{:bang.to_s}")
     end
   end
+
+  describe '#parameters_keys' do
+    context 'when param is array ' do
+      let(:params) { Zoom::Params.new([{foo: :bar, baz: :bang}, {foo: :bar1, baz: :bang1}]) }
+  
+      it 'get each object keys and return unique of them' do
+        expect(params.parameters_keys).to eq([:foo, :baz])
+      end
+    end
+    
+    context 'when param is Hash ' do
+      let(:params) { Zoom::Params.new({foo: :bar, baz: :bang}) }
+  
+      it 'return hash keys' do
+        expect(params.parameters_keys).to eq([:foo, :baz])
+      end
+    end
+  end
 end

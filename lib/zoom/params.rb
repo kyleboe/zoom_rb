@@ -32,7 +32,7 @@ module Zoom
                            array << hash_filter(filter)
                          end
                        end
-      non_permitted_params = @parameters.keys - permitted_keys.flatten
+      non_permitted_params = parameters_keys - permitted_keys.flatten
       raise Zoom::ParameterNotPermitted, non_permitted_params.to_s unless non_permitted_params.empty?
     end
 
@@ -104,6 +104,14 @@ module Zoom
       value = @parameters[key]
       unless !value || values.include?(value)
         raise Zoom::ParameterValueNotPermitted, "#{key}: #{value}"
+      end
+    end
+
+    def parameters_keys
+      if @parameters.kind_of?(Array)
+        @parameters.map(&:keys).flatten.uniq
+      else
+        @parameters.keys
       end
     end
   end
