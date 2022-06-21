@@ -12,6 +12,11 @@ module Zoom
         permit: :code_verifier,
         args_to_params: { auth_code: :code }
 
+      post 'access_tokens_account_credentials',
+        '/oauth/token?grant_type=account_credentials',
+        oauth: true,
+        require: :account_id
+
       post 'refresh_tokens',
         '/oauth/token',
         oauth: true,

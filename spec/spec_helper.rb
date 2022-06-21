@@ -45,6 +45,10 @@ def oauth_client
   Zoom::Client::OAuth.new(auth_token: 'xxx', auth_code: 'xxx', redirect_uri: 'xxx', timeout: 15)
 end
 
+def server_to_server_oauth_client
+  Zoom::Client::ServerToServerOAuth.new(account_id: 'xxx')
+end
+
 def zoom_client
   jwt_client
 end

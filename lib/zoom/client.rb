@@ -59,3 +59,4 @@ end
 
 require 'zoom/clients/jwt'
 require 'zoom/clients/oauth'
+require 'zoom/clients/server_to_server_oauth'
