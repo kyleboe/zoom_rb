@@ -1,3 +1,15 @@
+# 1.1.2
+
+### New Features
+
+* Add ServerToServer OAuth client [#423](https://github.com/hintmedia/zoom_rb/pull/423)
+
+### Fixes
+
+* Webinar Settings API permits `language_interpretation` key/values [#424](https://github.com/hintmedia/zoom_rb/pull/424)
+* Check if response is a `Hash` [#421](https://github.com/hintmedia/zoom_rb/pull/421)
+
+
 # 1.1.1
 
 ### Fixes
