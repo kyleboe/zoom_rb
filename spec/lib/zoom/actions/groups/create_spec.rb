@@ -59,7 +59,7 @@ describe Zoom::Actions::Groups do
       end
 
       it 'raises an error' do
-        expect { response }.to raise_error(Zoom::Error)
+        expect { response }.to raise_error(Zoom::Conflict)
       end
     end
 

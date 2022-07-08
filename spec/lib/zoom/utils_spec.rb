@@ -20,9 +20,34 @@ describe Zoom::Utils do
       expect { Utils.raise_if_error!(response) }.to raise_error(Zoom::AuthenticationError)
     end
 
-    it 'raises Zoom::Error if error is present and code >= 300' do
-      response = { 'code' => 400, 'message' => 'lol error' }
-      expect { Utils.raise_if_error!(response) }.to raise_error(Zoom::Error)
+    it 'raises Zoom::BadRequest if error is present and code = 400' do
+      response = { 'code' => 400, 'message' => 'Invalid access token.' }
+      expect { Utils.raise_if_error!(response) }.to raise_error(Zoom::BadRequest)
+    end
+
+    it 'raises Zoom::Unauthorized if error is present and code = 401' do
+      response = { 'code' => 401, 'message' => 'Invalid access token.' }
+      expect { Utils.raise_if_error!(response) }.to raise_error(Zoom::Unauthorized)
+    end
+
+    it 'raises Zoom::Forbidden if error is present and code = 403' do
+      response = { 'code' => 403, 'message' => 'Invalid access token.' }
+      expect { Utils.raise_if_error!(response) }.to raise_error(Zoom::Forbidden)
+    end
+
+    it 'raises Zoom::NotFound if error is present and code = 404' do
+      response = { 'code' => 404, 'message' => 'Invalid access token.' }
+      expect { Utils.raise_if_error!(response) }.to raise_error(Zoom::NotFound)
+    end
+
+    it 'raises Zoom::Conflict if error is present and code = 429' do
+      response = { 'code' => 429, 'message' => 'Invalid access token.' }
+      expect { Utils.raise_if_error!(response) }.to raise_error(Zoom::Conflict)
+    end
+
+    it 'raises Zoom::InternalServerError if error is present and code = 500' do
+      response = { 'code' => 500, 'message' => 'Invalid access token.' }
+      expect { Utils.raise_if_error!(response) }.to raise_error(Zoom::InternalServerError)
     end
 
     it 'does not raise Zoom::Error if error is not present' do
@@ -35,11 +60,10 @@ describe Zoom::Utils do
       expect { Utils.raise_if_error!(response) }.to_not raise_error
     end
 
-    it 'raises Zoom::Error if http code is not 200' do
+    it 'raises Zoom::Error if http code is not in [124, 400, 401, 403, 404, 429, 500]' do
       response = { 'code' => 180, 'message' => 'lol error' }
       expect { Utils.raise_if_error!(response, 400) }.to raise_error(Zoom::Error)
     end
-
   end
 
   describe '#extract_options!' do

@@ -15,10 +15,16 @@ module Zoom
         return response unless response.is_a?(Hash) && response.key?('code')
 
         code = response['code']
-
-        raise AuthenticationError, build_error(response) if code == 124
         error_hash = build_error(response)
-        raise Error.new(error_hash, error_hash) if code >= 300 || http_code >= 400
+
+        raise AuthenticationError, error_hash if code == 124
+        raise BadRequest, error_hash if code == 400
+        raise Unauthorized, error_hash if code == 401
+        raise Forbidden, error_hash if code == 403
+        raise NotFound, error_hash if code == 404
+        raise Conflict, error_hash if code == 429
+        raise InternalServerError, error_hash if code == 500
+        raise Error.new(error_hash, error_hash)
       end
 
       def build_error(response)
