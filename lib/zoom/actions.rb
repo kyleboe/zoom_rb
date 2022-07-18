@@ -30,7 +30,7 @@ module Zoom
       client, method, parsed_path, params, request_options, oauth =
         args.values_at :client, :method, :parsed_path, :params, :request_options, :oauth
       case method
-      when :get
+      when :get, :delete
         request_options[:query] = params
       when :post, :put, :patch
         request_options[:body] =
