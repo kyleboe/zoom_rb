@@ -83,6 +83,7 @@ describe Zoom::Actions do
       let(:method) { :delete }
 
       it 'calls delete method on client with delete request_options' do
+        request_options[:query] = params
         expect(client.class).to receive(method).with(parsed_path, **request_options)
         subject
       end
