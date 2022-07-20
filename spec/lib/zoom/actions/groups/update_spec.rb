@@ -32,12 +32,12 @@ describe Zoom::Actions::Groups do
           :patch,
           zoom_url("/groups/#{args[:group_id]}")
         ).to_return(status: 404,
-                    body: json_response('error', 'group_not_exist'),
+                    body: '{ "code": 404, "message": "Group name Zoom Group Name is already in use." }',
                     headers: { 'Content-Type' => 'application/json' })
       end
 
-      it 'raises an error' do
-        expect { zc.group_update(args) }.to raise_error(Zoom::Error)
+      it 'raises Zoom::NotFound' do
+        expect { zc.group_update(args) }.to raise_error(Zoom::NotFound)
       end
     end
 
@@ -51,8 +51,8 @@ describe Zoom::Actions::Groups do
                     headers: { 'Content-Type' => 'application/json' })
       end
 
-      it 'raises an error' do
-        expect { zc.group_update(args) }.to raise_error(Zoom::Error)
+      it 'raises Zoom::Conflict' do
+        expect { zc.group_update(args) }.to raise_error(Zoom::Conflict)
       end
     end
   end

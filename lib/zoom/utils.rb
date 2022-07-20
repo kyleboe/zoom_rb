@@ -22,7 +22,8 @@ module Zoom
         raise Unauthorized, error_hash if code == 401
         raise Forbidden, error_hash if code == 403
         raise NotFound, error_hash if code == 404
-        raise Conflict, error_hash if code == 429
+        raise Conflict, error_hash if code == 409
+        raise TooManyRequests, error_hash if code == 429
         raise InternalServerError, error_hash if code == 500
         raise Error.new(error_hash, error_hash)
       end
