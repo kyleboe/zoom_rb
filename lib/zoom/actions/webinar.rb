@@ -77,6 +77,9 @@ module Zoom
       get 'webinar_poll_get', '/webinars/:webinar_id/polls/:poll_id'
 
       get 'webinar_panelist_list', '/webinars/:webinar_id/panelists'
+
+      get 'past_webinars_absentees', '/past_webinars/:webinar_uuid/absentees',
+        permit: %i[occurrence_id page_size next_page_token]
     end
   end
 end
