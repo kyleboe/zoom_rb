@@ -38,7 +38,7 @@ describe Zoom::Actions::IM::Chat do
       end
 
       it 'raises Zoom::Error exception' do
-        expect { zc.get_chat_channels(args) }.to raise_error(Zoom::Error, {
+        expect { zc.get_chat_channels(args) }.to raise_error(Zoom::BadRequest, {
           base: "Unauthorized request. You do not have permission to access this user’s channel information."
         }.to_s)
       end

@@ -37,7 +37,7 @@ describe Zoom::Actions::User do
       end
 
       it 'raises an error' do
-        expect { zc.user_email_update(args) }.to raise_error(Zoom::Error)
+        expect { zc.user_email_update(args) }.to raise_error(Zoom::BadRequest)
       end
     end
 

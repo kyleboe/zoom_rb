@@ -15,4 +15,11 @@ module Zoom
   class ParameterNotPermitted < StandardError; end
   class ParameterValueNotPermitted < StandardError; end
   class AuthenticationError < StandardError; end
+  class BadRequest < StandardError; end
+  class Unauthorized < StandardError; end
+  class Forbidden < StandardError; end
+  class NotFound < StandardError; end
+  class Conflict < StandardError; end
+  class TooManyRequests < StandardError; end
+  class InternalServerError < StandardError; end
 end
