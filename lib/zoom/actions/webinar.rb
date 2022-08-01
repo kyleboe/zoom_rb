@@ -32,7 +32,7 @@ module Zoom
                       ].freeze
 
       get 'webinar_list', '/users/:host_id/webinars',
-        permit: %i[page_size page_number]
+        permit: %i[page_size next_page_token]
 
       # TODO: process recurrence keys based on constants
       # TODO: process settings keys based on constants
