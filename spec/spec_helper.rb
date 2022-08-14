@@ -7,9 +7,12 @@ require 'rubygems'
 require 'bundler/setup'
 require 'zoom_rb'
 require 'webmock/rspec'
+require 'support/fake_zoom'
 
 RSpec.configure do |config|
-  # some (optional) config here
+    config.before(:each) do
+      stub_request(:any, /api.zoom.us/).to_rack(FakeZoom)
+  end
 end
 
 def fixture(*path, filename)

@@ -71,6 +71,19 @@ module Zoom
         meeting_list(options.merge(type: 'live'))
       end
 
+      def meeting_bulk_register(*args)
+        options = Zoom::Params.new(Utils.extract_options!(args))
+        options.require(%i[meeting_id registrants])
+
+        registrants = options[:registrants].map do |data|
+          registrant = Zoom::Params.new(data)
+          registrant.require(%i[email first_name last_name])
+          registrant
+        end
+
+        Utils.parse_response self.class.post("/meetings/#{options[:meeting_id]}/batch_registrants", query: options.slice(:occurrence_ids), body: registrants.to_json, headers: request_headers)
+      end
+
       # Register for a meeting.
       def meeting_register(*args)
         options = Zoom::Params.new(Utils.extract_options!(args))
@@ -116,6 +129,7 @@ module Zoom
         options.require(%i[meeting_id stream_url stream_key]).permit(%i[page_url])
         Utils.parse_response self.class.patch("/meetings/#{options[:meeting_id]}/livestream", body: options.except(:meeting_id), headers: request_headers)
       end
+
     end
   end
 end

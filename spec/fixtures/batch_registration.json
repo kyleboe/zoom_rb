@@ -1,0 +1,14 @@
+{
+  "registrants": [
+    {
+      "email": "john.doe@example.com",
+      "join_url": "https://example.com/j/11111",
+      "registrant_id": "some-registration-id"
+    },
+    {
+      "email": "jane.roe@example.com",
+      "join_url": "https://example.com/j/222222",
+      "registrant_id": "some-other-registration-id"
+    }
+  ]
+}
