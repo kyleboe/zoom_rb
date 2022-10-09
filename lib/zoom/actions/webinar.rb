@@ -78,6 +78,14 @@ module Zoom
 
       get 'webinar_panelist_list', '/webinars/:webinar_id/panelists'
 
+      post 'webinar_panelist_add', '/webinars/:webinar_id/panelists',
+        require: :panelists,
+        permit: [ panelists: [] ]
+
+      delete 'webinar_panelist_delete', '/webinars/:webinar_id/panelists/:panelist_id'
+
+      delete 'webinar_panelists_delete_all', '/webinars/:webinar_id/panelists'
+
       get 'past_webinars_absentees', '/past_webinars/:webinar_uuid/absentees',
         permit: %i[occurrence_id page_size next_page_token]
     end
