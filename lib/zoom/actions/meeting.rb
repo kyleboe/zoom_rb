@@ -41,7 +41,7 @@ module Zoom
         permit: %i[
           last_name address city country zip state phone industry org job_title
           purchasing_time_frame role_in_purchase_process no_of_employees comments custom_questions
-          language occurrence_ids
+          language occurrence_ids auto_approve
         ]
 
       # Register up to 30 registrants at once for a meeting that requires registration.
