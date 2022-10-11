@@ -44,6 +44,10 @@ module Zoom
           language occurrence_ids
         ]
 
+      # Register up to 30 registrants at once for a meeting that requires registration.
+      post 'batch_registrants', '/meetings/:meeting_id/batch_registrants',
+        permit: %i[registrants auto_approve registrants_confirmation_email]
+
       # Register for a meeting.
       patch 'meeting_registrant_questions', '/meeting/:meeting_id/registrants/questions'
 
