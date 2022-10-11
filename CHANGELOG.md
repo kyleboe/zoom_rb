@@ -86,4 +86,4 @@ This is the first CHANGELOG entry.
 ### Misc:
 * Update gems
 * Update bundler to 2.2
-* Update Ruby to 3.0
+* Update Ruby to 2.7
