@@ -28,6 +28,24 @@ module Zoom
                             allow_anonymous_questions answer_questions attendees_can_comment
                             attendees_can_upvote enable
                           ]
+                        },
+                        {
+                          attendees_and_panelists_reminder_email_notification: [
+                            :enable,
+                            :type
+                          ]
+                        },
+                        {
+                          follow_up_absentees_email_notification: [
+                            :enable,
+                            :type
+                          ]
+                        },
+                        {
+                          follow_up_attendees_email_notification: [
+                            :enable,
+                            :type
+                          ]
                         }
                       ].freeze
 
