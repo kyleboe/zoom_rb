@@ -46,4 +46,24 @@ describe Zoom::Actions::Meeting do
       }.to raise_error(NoMethodError)
     end
   end
+
+  describe '#past_meeting_instances' do
+    before :each do
+      stub_request(
+        :get,
+        zoom_url("/past_meetings/#{args[:meeting_id]}/instances")
+      ).to_return(
+        status: 200,
+        body: json_response('meeting','instances'){},
+        headers: { 'Content-Type' => 'application/json' }
+      )
+    end
+
+    it 'returns meeting instances' do
+      res = zc.past_meeting_instances(args)
+
+      expect(res['meetings'][0]['start_time']).to eq('2022-03-26T05:37:59Z')
+      expect(res['meetings'][0]['uuid']).to eq('Vg8IdgluR5WDeWIkpJlElQ==')
+    end
+  end
 end

@@ -58,6 +58,9 @@ module Zoom
       # Retrieve ended meeting details
       get 'past_meeting_details', '/past_meetings/:meeting_uuid'
 
+      # Retrieve past meeting instances
+      get 'past_meeting_instances', '/past_meetings/:meeting_id/instances'
+
       # Retrieve ended meeting participants
       get 'past_meeting_participants', '/past_meetings/:meeting_uuid/participants'
 
