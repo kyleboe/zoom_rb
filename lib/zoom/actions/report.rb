@@ -15,6 +15,8 @@ module Zoom
 
       get 'webinar_participants_report', '/report/webinars/:id/participants',
         permit: %i[page_size next_page_token]
+
+      get 'webinar_details_report', '/report/webinars/:id'
     end
   end
 end
