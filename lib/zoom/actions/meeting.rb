@@ -35,6 +35,11 @@ module Zoom
       put 'meeting_update_status', '/meetings/:meeting_id/status',
         permit: :action
 
+      # Update registrant's status
+      put 'meeting_registrants_status_update', '/meetings/:meeting_id/registrants/status',
+          require: :action,
+          permit: [ :occurrence_id, registrants: [] ]
+
       # Register for a meeting.
       post 'meeting_add_registrant', '/meetings/:meeting_id/registrants',
         require: %i[email first_name],
