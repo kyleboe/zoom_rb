@@ -3,7 +3,7 @@
 module Zoom
   module Actions
     def self.extract_path_keys(path)
-      path.scan(/:\w+/).map { |match| match[1..].to_sym }
+      path.scan(/\w+/).map { |match| match[1..-1].to_sym }
     end
 
     def self.parse_path(path, path_keys, params)
