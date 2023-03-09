@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    zoom_rb (1.1.5)
+    zoom_rb (1.1.7)
       httparty (>= 0.13)
       json (>= 1.8)
       jwt
@@ -35,7 +35,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
-    json (2.6.2)
+    json (2.6.3)
     jwt (2.5.0)
     method_source (1.0.0)
     mime-types (3.4.1)

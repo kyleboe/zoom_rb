@@ -35,14 +35,23 @@ module Zoom
       put 'meeting_update_status', '/meetings/:meeting_id/status',
         permit: :action
 
+      # Update registrant's status
+      put 'meeting_registrants_status_update', '/meetings/:meeting_id/registrants/status',
+          require: :action,
+          permit: [ :occurrence_id, registrants: [] ]
+
       # Register for a meeting.
       post 'meeting_add_registrant', '/meetings/:meeting_id/registrants',
         require: %i[email first_name],
         permit: %i[
           last_name address city country zip state phone industry org job_title
           purchasing_time_frame role_in_purchase_process no_of_employees comments custom_questions
-          language occurrence_ids
+          language occurrence_ids auto_approve
         ]
+
+      # Register up to 30 registrants at once for a meeting that requires registration.
+      post 'batch_registrants', '/meetings/:meeting_id/batch_registrants',
+        permit: %i[registrants auto_approve registrants_confirmation_email]
 
       # Register for a meeting.
       patch 'meeting_registrant_questions', '/meeting/:meeting_id/registrants/questions'
