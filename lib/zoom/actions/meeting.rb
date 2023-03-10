@@ -12,7 +12,7 @@ module Zoom
       # Create a meeting on Zoom, return the created meeting URL
       post 'meeting_create', '/users/:user_id/meetings',
         permit: %i[
-          topic type start_time duration schedule_for timezone password agenda tracking_fields
+          topic type start_time duration schedule_for timezone password default_password agenda tracking_fields
           recurrence settings template_id
         ]
 
