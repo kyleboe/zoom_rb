@@ -21,8 +21,8 @@ module Zoom
                         ],
                         {
                           language_interpretation: [
-                          :enable,
-                          interpreters: %i[email languages]
+                            :enable,
+                            interpreters: %i[email languages]
                           ],
                           question_and_answer: %i[
                             allow_anonymous_questions answer_questions attendees_can_comment
