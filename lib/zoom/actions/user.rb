@@ -102,7 +102,7 @@ module Zoom
 
       def user_settings_update(*args)
         params = Zoom::Params.new(Utils.extract_options!(args))
-        params.require(:id).permit(recording: [:recording_disclaimer, :cloud_recording, :record_audio_file], email_notification: [:cloud_recording_available_reminder])
+        params.require(:id).permit(recording: [:recording_disclaimer, :cloud_recording, :record_audio_file], email_notification: [:cloud_recording_available_reminder], in_meeting: [:co_host, :waiting_room, :auto_recording, :breakout_room, :manual_captioning [:manual_captions]])
         Utils.parse_response self.class.patch("/users/#{params[:id]}/settings", body: params.except(:id).to_json, headers: request_headers)
       end
 
