@@ -27,3 +27,14 @@ jobs:
         with:
           flag-name: ruby-${{ matrix.ruby }}
           parallel: true
+
+  finish:
+    needs: test
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@v2
+        with:
+          parallel-finished: true
+          carryforward: "ruby-2.7,ruby-3.0,ruby-3.1,ruby-3.2"
