@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe Zoom::Actions::Webinar do
   let(:zc) { zoom_client }
-  let(:args) { { id: 'webinar_id', action: 'approve' } }
+  let(:args) { {id: "webinar_id", action: "approve"} }
 
-  describe '#webinar_registrants_status_update' do
-    context 'with a valid response' do
+  describe "#webinar_registrants_status_update" do
+    context "with a valid response" do
       before :each do
         stub_request(
           :put,
@@ -24,17 +24,17 @@ RSpec.describe Zoom::Actions::Webinar do
       end
     end
 
-    context 'with a 4xx response' do
+    context "with a 4xx response" do
       before :each do
         stub_request(
           :put,
           zoom_url("/webinars/#{args[:id]}/registrants/status")
         ).to_return(status: 404,
-                    body: json_response('error', 'validation'),
-                    headers: { 'Content-Type' => 'application/json' })
+          body: json_response("error", "validation"),
+          headers: {"Content-Type" => "application/json"})
       end
 
-      it 'raises Zoom::Error exception' do
+      it "raises Zoom::Error exception" do
         expect { zc.webinar_registrants_status_update(args) }.to raise_error(Zoom::Error)
       end
     end

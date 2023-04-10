@@ -1,23 +1,25 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe Zoom::Actions::Webinar do
   let(:zc) { zoom_client }
-  let(:args) { { id: 'webinar_id',
-                 first_name: 'Zoomie',
-                 last_name: 'Userton',
-                 email: 'foo@bar.com' } }
+  let(:args) {
+    {id: "webinar_id",
+     first_name: "Zoomie",
+     last_name: "Userton",
+     email: "foo@bar.com"}
+  }
 
-  describe '#webinar_registrant_add' do
-    context 'with a valid response' do
+  describe "#webinar_registrant_add" do
+    context "with a valid response" do
       before :each do
         stub_request(
           :post,
           zoom_url("/webinars/#{args[:id]}/registrants")
         ).to_return(status: 201,
-                    body: json_response('webinar', 'registrant', 'add'),
-                    headers: { 'Content-Type' => 'application/json' })
+          body: json_response("webinar", "registrant", "add"),
+          headers: {"Content-Type" => "application/json"})
       end
 
       it "requires a 'id' argument" do
@@ -36,27 +38,27 @@ RSpec.describe Zoom::Actions::Webinar do
         expect { zc.webinar_registrant_add(filter_key(args, :email)) }.to raise_error(Zoom::ParameterMissing, [:email].to_s)
       end
 
-      it 'returns an Hash' do
+      it "returns an Hash" do
         expect(zc.webinar_registrant_add(args)).to be_kind_of(Hash)
       end
 
       it 'returns a "join_url"' do
         res = zc.webinar_registrant_add(args)
-        expect(res['join_url']).not_to be nil
+        expect(res["join_url"]).not_to be nil
       end
     end
 
-    context 'with a 4xx response' do
+    context "with a 4xx response" do
       before :each do
         stub_request(
           :post,
           zoom_url("/webinars/#{args[:id]}/registrants")
         ).to_return(status: 404,
-                    body: json_response('error', 'not_found'),
-                    headers: { 'Content-Type' => 'application/json' })
+          body: json_response("error", "not_found"),
+          headers: {"Content-Type" => "application/json"})
       end
 
-      it 'raises Zoom::Error exception' do
+      it "raises Zoom::Error exception" do
         expect { zc.webinar_registrant_add(args) }.to raise_error(Zoom::Error)
       end
     end

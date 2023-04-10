@@ -11,10 +11,10 @@ module Zoom
         name ? ArgumentError.new("Unrecognized parameter #{name}") : ArgumentError.new
       end
 
-      def raise_if_error!(response, http_code=200)
-        return response unless response.is_a?(Hash) && response.key?('code')
+      def raise_if_error!(response, http_code = 200)
+        return response unless response.is_a?(Hash) && response.key?("code")
 
-        code = response['code']
+        code = response["code"]
         error_hash = build_error(response)
 
         raise AuthenticationError, error_hash if code == 124
@@ -29,8 +29,8 @@ module Zoom
       end
 
       def build_error(response)
-        error_hash = { base: response['message']}
-        error_hash[response['message']] = response['errors'] if response['errors']
+        error_hash = {base: response["message"]}
+        error_hash[response["message"]] = response["errors"] if response["errors"]
         error_hash
       end
 
@@ -45,14 +45,14 @@ module Zoom
 
       def validate_password(password)
         password_regex = /\A[a-zA-Z0-9@-_*]{0,10}\z/
-        raise(Error , 'Invalid Password') unless password[password_regex].nil?
+        raise(Error, "Invalid Password") unless password[password_regex].nil?
       end
 
       def process_datetime_params!(params)
         params.each do |key, value|
           case key
           when Symbol, String
-            params[key] = value.is_a?(Time) ? value.strftime('%FT%TZ') : value
+            params[key] = value.is_a?(Time) ? value.strftime("%FT%TZ") : value
           when Hash
             process_datetime_params!(params[key])
           end

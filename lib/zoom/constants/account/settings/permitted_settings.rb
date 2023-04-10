@@ -107,7 +107,7 @@ module Zoom
             :call_out,
             :show_international_numbers_link,
             :display_toll_free_numbers,
-            { call_out_countries: [] }
+            {call_out_countries: []}
           ],
           integration: %i[
             google_calendar

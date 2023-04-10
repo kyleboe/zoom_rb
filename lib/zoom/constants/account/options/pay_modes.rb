@@ -3,8 +3,8 @@ module Zoom
     module Account
       module Options
         PAY_MODES = {
-          'master' => 'Master account holder pays', # default
-          'sub' => 'Sub account holder pays'
+          "master" => "Master account holder pays", # default
+          "sub" => "Sub account holder pays"
         }.freeze
       end
     end

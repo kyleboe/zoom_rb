@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 describe Zoom::Actions::Token do
   let(:zc) { oauth_client }
@@ -21,25 +21,25 @@ describe Zoom::Actions::Token do
     }
   end
 
-  describe '#data_compliance action' do
+  describe "#data_compliance action" do
     before :each do
       Zoom.configure do |config|
-        config.api_key = 'xxx'
-        config.api_secret = 'xxx'
+        config.api_key = "xxx"
+        config.api_secret = "xxx"
       end
 
       stub_request(
         :post,
-        zoom_auth_url('oauth/data/compliance')
-      ).to_return(body: json_response('token', 'data_compliance'),
-                    headers: { 'Content-Type' => 'application/json' })
+        zoom_auth_url("oauth/data/compliance")
+      ).to_return(body: json_response("token", "data_compliance"),
+        headers: {"Content-Type" => "application/json"})
     end
 
     it "raises an error when args missing" do
       expect { zc.data_compliance }.to raise_error(Zoom::ParameterMissing, [:client_id, :user_id, :account_id, :deauthorization_event_received, :compliance_completed].to_s)
     end
 
-    it 'returns a hash' do
+    it "returns a hash" do
       expect(zc.data_compliance(args)).to be_kind_of(Hash)
     end
   end

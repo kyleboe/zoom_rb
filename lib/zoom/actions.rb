@@ -3,14 +3,14 @@
 module Zoom
   module Actions
     def self.extract_path_keys(path)
-      path.scan(/:\w+/).map { |match| match[1..-1].to_sym }
+      path.scan(/:\w+/).map { |match| match[1..].to_sym }
     end
 
     def self.parse_path(path, path_keys, params)
       parsed_path = path.dup
       path_keys.each do |key|
-        value        = params[key].to_s
-        parsed_path  = parsed_path.sub(":#{key}", value)
+        value = params[key].to_s
+        parsed_path = parsed_path.sub(":#{key}", value)
       end
       parsed_path
     end
@@ -19,10 +19,10 @@ module Zoom
       if oauth
         {
           headers: client.oauth_request_headers,
-          base_uri: 'https://zoom.us/'
+          base_uri: "https://zoom.us/"
         }
       else
-        { headers: client.request_headers }
+        {headers: client.request_headers}
       end
     end
 
@@ -40,8 +40,8 @@ module Zoom
     end
 
     [:get, :post, :patch, :put, :delete].each do |method|
-      define_method(method) do |name, path, options={}|
-        required, permitted, oauth, args_to_params, headers =
+      define_method(method) do |name, path, options = {}|
+        required, permitted, oauth, args_to_params, _headers =
           options.values_at :require, :permit, :oauth, :args_to_params, :headers
         required = Array(required) unless required.is_a?(Hash)
         permitted = Array(permitted) unless permitted.is_a?(Hash)
