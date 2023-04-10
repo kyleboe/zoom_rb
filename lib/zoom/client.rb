@@ -52,11 +52,10 @@ module Zoom
     end
 
     def auth_token
-      Base64.encode64("#{Zoom.configuration.api_key}:#{Zoom.configuration.api_secret}").delete("\n")
+      Base64.encode64("#{Zoom.configuration.client_id}:#{Zoom.configuration.client_secret}").delete("\n")
     end
   end
 end
 
-require "zoom/clients/jwt"
 require "zoom/clients/oauth"
 require "zoom/clients/server_to_server_oauth"
