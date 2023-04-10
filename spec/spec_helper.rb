@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'simplecov'
-SimpleCov.start 'specs' do
+SimpleCov.start do
   if ENV['CI']
     require 'simplecov-lcov'
 
