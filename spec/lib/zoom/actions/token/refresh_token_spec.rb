@@ -22,11 +22,6 @@ describe Zoom::Actions::Token do
     end
 
     before :each do
-      Zoom.configure do |config|
-        config.api_key = "xxx"
-        config.api_secret = "xxx"
-      end
-
       allow(Zoom::Utils).to receive(:parse_response).and_return(code: 200)
       allow(Zoom::Client::OAuth).to(
         receive(:post).with(path, params)

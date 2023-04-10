@@ -3,7 +3,7 @@
 require "spec_helper"
 
 RSpec.describe Zoom::Actions::Webinar do
-  %i[jwt_client oauth_client server_to_server_oauth_client].each do |client|
+  %i[oauth_client server_to_server_oauth_client].each do |client|
     describe client.to_s do
       let(:zc) { send(client) }
       let(:args) { {host_id: "test_user_id"} }

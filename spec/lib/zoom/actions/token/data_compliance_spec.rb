@@ -23,11 +23,6 @@ describe Zoom::Actions::Token do
 
   describe "#data_compliance action" do
     before :each do
-      Zoom.configure do |config|
-        config.api_key = "xxx"
-        config.api_secret = "xxx"
-      end
-
       stub_request(
         :post,
         zoom_auth_url("oauth/data/compliance")

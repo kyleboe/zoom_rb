@@ -32,13 +32,6 @@ describe Zoom::Actions do
 
     let(:request_options) { Zoom::Actions.determine_request_options(client, oauth) }
 
-    before :each do
-      Zoom.configure do |config|
-        config.api_key = "xxx"
-        config.api_secret = "xxx"
-      end
-    end
-
     context "when get" do
       let(:method) { :get }
 

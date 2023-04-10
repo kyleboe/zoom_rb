@@ -50,20 +50,16 @@ def zoom_auth_url(url)
   /https:\/\/zoom.us\/#{url}.*/
 end
 
-def jwt_client
-  Zoom.new
-end
-
 def oauth_client
   Zoom::Client::OAuth.new(auth_token: "xxx", auth_code: "xxx", redirect_uri: "xxx", timeout: 15)
 end
 
 def server_to_server_oauth_client
-  Zoom::Client::ServerToServerOAuth.new(account_id: "xxx")
+  Zoom.new
 end
 
 def zoom_client
-  jwt_client
+  server_to_server_oauth_client
 end
 
 def filter_key(hash, key)
