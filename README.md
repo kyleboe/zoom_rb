@@ -1,4 +1,4 @@
-# zoom_rb [![Maintainability](https://api.codeclimate.com/v1/badges/8b8d168aa7e9d3d004f6/maintainability)](https://codeclimate.com/github/kyleboe/zoom_rb/maintainability) [![Gem Version](https://badge.fury.io/rb/zoom_rb@2x.png)](https://badge.fury.io/rb/zoom_rb)
+# zoom_rb [![Coverage Status](https://coveralls.io/repos/github/kyleboe/zoom_rb/badge.svg?branch=main)](https://coveralls.io/github/kyleboe/zoom_rb?branch=main) [![Maintainability](https://api.codeclimate.com/v1/badges/8b8d168aa7e9d3d004f6/maintainability)](https://codeclimate.com/github/kyleboe/zoom_rb/maintainability) [![Gem Version](https://badge.fury.io/rb/zoom_rb@2x.png)](https://badge.fury.io/rb/zoom_rb)
 
 Ruby wrapper gem for zoom.us API (currently `v2`)
 
