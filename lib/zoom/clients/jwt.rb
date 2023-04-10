@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 require 'jwt'
+require 'logger'
 
 module Zoom
   class Client
     class JWT < Zoom::Client
 
       def initialize(config)
+        ::Logger.new(STDOUT).warn('Zoom::Client::JWT is deprecated. Please use Zoom::Client::ServerToServerOAuth instead. See: https://developers.zoom.us/docs/internal-apps/jwt-faq/')
         Zoom::Params.new(config).require(:api_key, :api_secret)
         config.each { |k, v| instance_variable_set("@#{k}", v) }
         self.class.default_timeout(@timeout || 20)
