@@ -20,8 +20,8 @@ module Zoom
       get "user_get", "/users/:id",
         permit: :login_type
 
-      patch "user_update", "/users/:id",
-        permit: %i[first_name last_name type pmi timezone dept vanity_name host_key cms_user_id]
+      patch 'user_update', '/users/:id',
+        permit: %i[first_name last_name type pmi timezone dept vanity_name host_key cms_user_id custom_attributes]
 
       delete "user_delete", "/users/:id",
         permit: %i[action transfer_email transfer_meeting transfer_webinar transfer_recording]
