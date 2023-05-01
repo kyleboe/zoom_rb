@@ -22,7 +22,7 @@ module Zoom
       def auth_token
         return Base64.urlsafe_encode64("#{@client_id}:#{@client_secret}") if @client_id && @client_secret
 
-        Base64.urlsafe_encode64("#{Zoom.configuration.api_key}:#{Zoom.configuration.api_secret}")
+        raise Zoom::Error.new("Client ID and Client Secret are required to generate an auth token")
       end
 
       private

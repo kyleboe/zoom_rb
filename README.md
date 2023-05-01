@@ -18,18 +18,19 @@ Or install it yourself as:
 
 ## Usage
 
-The Zoom API uses OAuth or JWT to [Authenticate](https://marketplace.zoom.us/docs/api-reference/Authentication) API request. By default, a JWT client will be used.
+The Zoom API uses OAuth 2.0 to [Authenticate](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#authentication) API request. By default, a `ServerToServerOAuth` client will be used.
 
 ```ruby
 Zoom.configure do |c|
-  c.api_key = 'xxx'
-  c.api_secret = 'xxx'
+  c.account_id = 'xxx'
+  c.client_id = 'xxx'
+  c.client_secret = 'xxx'
 end
 
 zoom_client = Zoom.new
 ```
 
-To create an OAuth flow you need to make a call to auth, then create the client directly from an access token.
+To create a non-ServerToServer OAuth flow, you need to make a call to auth, then create the client directly from an access token.
 
 First you need to get an auth_code externally from:
 ```

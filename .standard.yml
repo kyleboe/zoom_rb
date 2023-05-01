@@ -1,0 +1,6 @@
+require: rubocop-rspec
+parallel: true
+
+ignore:
+  - 'test/**/*':
+    - Layout/AlignHash

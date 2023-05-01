@@ -5,14 +5,14 @@ module Zoom
     module Groups
       extend Zoom::Actions
 
-      get 'groups_list', '/groups'
+      get "groups_list", "/groups"
 
-      get 'groups_get', '/groups/:group_id'
+      get "groups_get", "/groups/:group_id"
 
-      post 'group_create', '/groups',
+      post "group_create", "/groups",
         permit: :name
 
-      patch 'group_update', '/groups/:group_id',
+      patch "group_update", "/groups/:group_id",
         permit: :name
     end
   end

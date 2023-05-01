@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require 'delegate'
+
+require "delegate"
 
 module Zoom
   class Params < SimpleDelegator
@@ -18,20 +19,20 @@ module Zoom
       required_keys = keys
       keys = find_matching_keys(keys.flatten)
       unless keys.any?
-        message = required_keys.length > 1 ? "You are missing atleast one of #{required_keys}" : required_keys
+        message = (required_keys.length > 1) ? "You are missing atleast one of #{required_keys}" : required_keys
         raise Zoom::ParameterMissing, message
       end
     end
 
     def permit(*filters)
       permitted_keys = filters.flatten.each.with_object([]) do |filter, array|
-                         case filter
-                         when Symbol, String
-                           array << filter
-                         when Hash
-                           array << hash_filter(filter)
-                         end
-                       end
+        case filter
+        when Symbol, String
+          array << filter
+        when Hash
+          array << hash_filter(filter)
+        end
+      end
       non_permitted_params = parameters_keys - permitted_keys.flatten
       raise Zoom::ParameterNotPermitted, non_permitted_params.to_s unless non_permitted_params.empty?
     end
@@ -46,7 +47,7 @@ module Zoom
     end
 
     EMPTY_ARRAY = [].freeze
-    EMPTY_HASH  = {}.freeze
+    EMPTY_HASH = {}.freeze
 
     def hash_filter(filter)
       # Slicing filters out non-declared keys.
@@ -86,7 +87,7 @@ module Zoom
           entry.keys.each do |k|
             array << k && next if self[k].nil?
             missing_entries = self.class.new(self[k]).find_missing_entries(*entry[k])
-            array << { k => missing_entries } unless missing_entries.empty?
+            array << {k => missing_entries} unless missing_entries.empty?
           end
         elsif self[entry].nil?
           array << entry
@@ -108,7 +109,7 @@ module Zoom
     end
 
     def parameters_keys
-      if @parameters.kind_of?(Array)
+      if @parameters.is_a?(Array)
         @parameters.map(&:keys).flatten.uniq
       else
         @parameters.keys

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'httparty'
+require "httparty"
 
 module Zoom
   class Client
@@ -22,28 +22,28 @@ module Zoom
     include Actions::IM::Chat
     include Actions::IM::Group
 
-    base_uri 'https://api.zoom.us/v2'
-    headers 'Accept' => 'application/json'
-    headers 'Content-Type' => 'application/json'
+    base_uri "https://api.zoom.us/v2"
+    headers "Accept" => "application/json"
+    headers "Content-Type" => "application/json"
 
     def headers
       {
-        'Accept' => 'application/json',
-        'Content-Type' => 'application/json',
+        "Accept" => "application/json",
+        "Content-Type" => "application/json"
       }
     end
 
     def oauth_request_headers
       {
-        'Authorization' => "Basic #{auth_token}",
-        'Accept' => 'application/json',
-        'Content-Type' => 'application/x-www-form-urlencoded',
+        "Authorization" => "Basic #{auth_token}",
+        "Accept" => "application/json",
+        "Content-Type" => "application/x-www-form-urlencoded"
       }
     end
 
     def bearer_authorization_header
       {
-        'Authorization' => "Bearer #{access_token}"
+        "Authorization" => "Bearer #{access_token}"
       }
     end
 
@@ -52,11 +52,10 @@ module Zoom
     end
 
     def auth_token
-      Base64.encode64("#{Zoom.configuration.api_key}:#{Zoom.configuration.api_secret}").delete("\n")
+      Base64.encode64("#{Zoom.configuration.client_id}:#{Zoom.configuration.client_secret}").delete("\n")
     end
   end
 end
 
-require 'zoom/clients/jwt'
-require 'zoom/clients/oauth'
-require 'zoom/clients/server_to_server_oauth'
+require "zoom/clients/oauth"
+require "zoom/clients/server_to_server_oauth"
