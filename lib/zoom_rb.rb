@@ -6,6 +6,7 @@ require 'zoom/version'
 require 'zoom/constants/constants'
 require 'zoom/params'
 require 'zoom/utils'
+require 'zoom/token_store'
 require 'zoom/actions'
 require 'zoom/actions/account'
 require 'zoom/actions/billing'
@@ -32,6 +33,7 @@ module Zoom
 
     def new
       @configuration ||= Configuration.new
+
       Zoom::Client::JWT.new(
         api_key: @configuration.api_key,
         api_secret: @configuration.api_secret,
@@ -46,12 +48,13 @@ module Zoom
   end
 
   class Configuration
-    attr_accessor :api_key, :api_secret, :timeout, :access_token
+    attr_accessor :api_key, :api_secret, :timeout, :access_token, :token_store
 
     def initialize
       @api_key = @api_secret = 'xxx'
       @access_token = nil
       @timeout = 15
+      @token_store = :memory, {}
     end
   end
 end

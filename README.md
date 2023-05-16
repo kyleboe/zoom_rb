@@ -69,6 +69,31 @@ rescue Zoom::Error => exception
 end
 ```
 
+## Token Store
+
+```ruby
+Zoom.configure do |c|
+  # ...
+
+  c.token_store = :redis, {
+    host: "127.0.0.1",
+    port: "6379",
+    db: "0"
+  }
+  c.store_key = account.id # optional, default: generate uuid
+end
+
+Zoom::Client::OAuth.new(
+  access_token: auth['access_token'], 
+  timeout: 15, 
+  token_store: [:redis, {
+    host: "127.0.0.1",
+    port: "6379",
+    db: "0"
+  }],
+  store_key: account.id
+)
+```
 
 ## Contributing
 
