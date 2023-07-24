@@ -120,7 +120,9 @@ describe Zoom::Client do
     end
 
     describe "set_tokens" do
-      let(:client) { Zoom::Client::ServerToServerOAuth.new(account_id: "xxx") }
+      let(:client) {
+        Zoom::Client::ServerToServerOAuth.new(account_id: "xxx", client_id: "xxx", client_secret: "xxx")
+      }
 
       before :each do
         Zoom.configure do |config|

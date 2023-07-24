@@ -50,7 +50,7 @@ module Zoom
     attr_accessor :account_id, :client_id, :client_secret, :timeout, :access_token
 
     def initialize
-      @client_id = @api_secret = @account_id = "xxx"
+      @account_id = @client_id = @client_secret = "xxx"
       @access_token = nil
       @timeout = 15
     end

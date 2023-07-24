@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-The Zoom API uses OAuth 2.0 to [Authenticate](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#authentication) API request. By default, a `ServerToServerOAuth` client will be used.
+The Zoom API uses OAuth 2.0 to [Authenticate](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#using-oauth-20) API request. By default, a `ServerToServerOAuth` client will be used.
 
 ```ruby
 Zoom.configure do |c|

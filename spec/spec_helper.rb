@@ -36,8 +36,10 @@ end
 def request_headers
   {
     "Accept" => "application/json",
+    "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
     "Content-Type" => "application/json",
-    "Authorization" => /Bearer .+/
+    "Authorization" => "Bearer",
+    "User-Agent" => "Ruby"
   }
 end
 

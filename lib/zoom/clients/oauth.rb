@@ -54,12 +54,12 @@ module Zoom
       private
 
       def set_tokens(response)
-        if response.is_a?(Hash) && !response.key?(:error)
-          @access_token = response["access_token"]
-          @refresh_token = response["refresh_token"]
-          @expires_in = response["expires_in"]
-          @expires_at = @expires_in ? (Time.now + @expires_in).to_i : nil
-        end
+        return unless response.is_a?(Hash) && !response.key?(:error)
+
+        @access_token = response["access_token"]
+        @refresh_token = response["refresh_token"]
+        @expires_in = response["expires_in"]
+        @expires_at = @expires_in ? (Time.now + @expires_in).to_i : nil
       end
     end
   end
