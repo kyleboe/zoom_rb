@@ -11,10 +11,10 @@ module Zoom
       get 'meeting_details_report', '/report/meetings/:id'
 
       get 'meeting_participants_report', '/report/meetings/:id/participants',
-        permit: %i[page_size next_page_token]
+        permit: %i[page_size next_page_token include_fields]
 
       get 'webinar_participants_report', '/report/webinars/:id/participants',
-        permit: %i[page_size next_page_token]
+        permit: %i[page_size next_page_token include_fields]
 
       get 'webinar_details_report', '/report/webinars/:webinar_id'
     end
