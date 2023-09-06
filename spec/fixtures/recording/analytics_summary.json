@@ -1,0 +1,16 @@
+{ 
+  "from":"2023-01-01",
+  "to":"2023-01-02",
+  "analytics_summary": [
+    {
+      "date":"2023-01-01",
+      "views_total_count":8,
+      "downloads_total_count":0
+    },
+    {
+      "date":"2023-01-02",
+      "views_total_count": 13,
+      "downloads_total_count": 1
+    }
+  ]
+}

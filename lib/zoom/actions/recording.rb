@@ -15,6 +15,11 @@ module Zoom
 
       get 'meeting_recording_settings_get', '/meetings/:meeting_id/recordings/settings'
 
+      get 'meeting_recording_analytics_summary', '/meetings/:meeting_id/recordings/analytics_summary'
+
+      get 'meeting_recording_analytics_details', '/meetings/:meeting_id/recordings/analytics_details',
+        permit: %i[page_size next_page_token from to type]
+
       patch 'meeting_recording_settings_update', '/meetings/:meeting_id/recordings/settings',
         permit: RECORDING_SETTINGS_KEYS
 

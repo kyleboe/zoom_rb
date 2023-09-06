@@ -1,0 +1,15 @@
+{
+  "from":"2023-01-01",
+  "to":"2023-01-02",
+  "next_page_token":"",
+  "page_size":30,
+  "total_records":1,
+  "analytics_details": [
+    {
+      "name":"John Doe",
+      "email":"john.doe@example.com",
+      "duration":1234,
+      "date_time":"2023-01-01T11:25:01Z"
+    }
+  ]
+}
