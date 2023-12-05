@@ -61,7 +61,7 @@ module Zoom
         permit: %i[occurrence_id status page_size next_page_token]
 
       # Delete a meeting registrant
-      delete 'meeting_registrant_delete', '/meetings/:meeting_id/registrants/:registrant_id',
+      delete 'meeting_delete_registrant', '/meetings/:meeting_id/registrants/:registrant_id',
         require: %i[meeting_id, registrant_id]
 
       # Retrieve ended meeting details
