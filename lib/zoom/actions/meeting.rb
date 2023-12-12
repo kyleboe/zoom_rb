@@ -69,14 +69,14 @@ module Zoom
         require: %i[meeting_id registrant_id]
 
       # Retrieve ended meeting details
-      get 'past_meeting_details', '/past_meetings/:meeting_id'
+      get 'past_meeting_details', '/past_meetings/:meeting_id',
         require: %i[meeting_id]
 
       # Retrieve past meeting instances
       get 'past_meeting_instances', '/past_meetings/:meeting_id/instances'
 
       # Retrieve ended meeting participants
-      get 'past_meeting_participants', '/past_meetings/:meeting_id/participants'
+      get 'past_meeting_participants', '/past_meetings/:meeting_id/participants',
         require: %i[meeting_id],
         permit: %i[page_size next_page_token include_fields]
 
