@@ -15,23 +15,26 @@ module Zoom
         return response unless response.is_a?(Hash) && response.key?('code')
 
         code = response['code']
-        error_hash = build_error(response)
+        message = build_error(response)
 
-        raise AuthenticationError, error_hash if code == 124
-        raise BadRequest, error_hash if code == 400
-        raise Unauthorized, error_hash if code == 401
-        raise Forbidden, error_hash if code == 403
-        raise NotFound, error_hash if code == 404
-        raise Conflict, error_hash if code == 409
-        raise TooManyRequests, error_hash if code == 429
-        raise InternalServerError, error_hash if code == 500
-        raise Error.new(error_hash, error_hash)
+        raise AuthenticationError, message if code == 124
+        raise BadRequest, message if code == 400
+        raise Unauthorized, message if code == 401
+        raise Forbidden, message if code == 403
+        raise NotFound, message if code == 404
+        raise Conflict, message if code == 409
+        raise TooManyRequests, message if code == 429
+        raise InternalServerError, message if code == 500
+        raise Error.new(message, message)
       end
 
       def build_error(response)
-        error_hash = { base: response['message']}
-        error_hash[response['message']] = response['errors'] if response['errors']
-        error_hash
+        message = response['message']
+        if response['errors']
+          "#{message}: #{response['errors'].join(', ')}"
+        else
+          message
+        end
       end
 
       def parse_response(http_response)
