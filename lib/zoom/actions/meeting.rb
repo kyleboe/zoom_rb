@@ -38,7 +38,7 @@ module Zoom
       # Update registrant's status
       put 'meeting_registrants_status_update', '/meetings/:meeting_id/registrants/status',
           require: :action,
-          permit: [ :occurrence_id, registrants: [] ]
+          permit: [ :occurrence_id, {registrants: []} ]
 
       # Register for a meeting.
       post 'meeting_add_registrant', '/meetings/:meeting_id/registrants',
@@ -61,8 +61,7 @@ module Zoom
         permit: %i[occurrence_id status page_size next_page_token]
 
       # Delete a meeting registrant
-      delete 'meeting_delete_registrant', '/meetings/:meeting_id/registrants/:registrant_id',
-        require: %i[meeting_id registrant_id]
+      delete 'meeting_delete_registrant', '/meetings/:meeting_id/registrants/:registrant_id'
       
       # Retrieve a meeting registrant
       get 'meeting_get_registrant', '/meetings/:meeting_id/registrants/:registrant_id'
