@@ -11,7 +11,8 @@ module Zoom
         require: :name,
         permit: %i[description privileges]
 
-      get 'roles_members', '/roles/:role_id/members'
+      get 'roles_members', '/roles/:role_id/members',
+        permit: %i[next_page_token, page_size, page_number]
 
       post 'roles_assign', '/roles/:role_id/members',
         require: :members

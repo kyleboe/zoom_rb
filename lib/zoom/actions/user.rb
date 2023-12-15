@@ -17,13 +17,13 @@ module Zoom
           user_info: %i[first_name last_name password]
         }
 
-      get 'user_get', '/users/:id',
+      get 'user_get', '/users/:user_id',
         permit: :login_type
 
-      patch 'user_update', '/users/:id',
+      patch 'user_update', '/users/:user_id',
         permit: %i[first_name last_name type pmi timezone dept vanity_name host_key cms_user_id custom_attributes]
 
-      delete 'user_delete', '/users/:id',
+      delete 'user_delete', '/users/:user_id',
         permit: %i[action transfer_email transfer_meeting transfer_webinar transfer_recording]
 
       get 'user_assistants_list', '/users/:user_id/assistants'
@@ -41,16 +41,16 @@ module Zoom
 
       delete 'user_schedulers_delete', '/users/:user_id/schedulers/:scheduler_id'
 
-      get 'user_settings_get', '/users/:id/settings',
+      get 'user_settings_get', '/users/:user_id/settings',
         permit: [:login_type, :option, :custom_query_fields]
 
-      patch 'user_settings_update', '/users/:id/settings',
+      patch 'user_settings_update', '/users/:user_id/settings',
         permit: %i[schedule_meeting in_meeting email_notification recording telephony feature tsp]
 
       get 'user_email_check', '/users/email',
         require: :email
 
-      get 'user_recordings_list', '/users/:id/recordings',
+      get 'user_recordings_list', '/users/:user_id/recordings',
         permit: %i[page_size next_page_token mc trash from to trash_type]
 
       get 'user_token', '/users/:user_id/token',
@@ -61,13 +61,13 @@ module Zoom
       get 'user_vanity_name', '/users/vanity_name',
         require: :vanity_name
 
-      patch 'user_password_update', '/users/:id/password',
+      patch 'user_password_update', '/users/:user_id/password',
         permit: :password
 
-      patch 'user_email_update', '/users/:id/email',
+      patch 'user_email_update', '/users/:user_id/email',
         permit: :email
 
-      patch 'user_status_update', '/users/:id/status',
+      patch 'user_status_update', '/users/:user_id/status',
         permit: :status
     end
   end
