@@ -4,13 +4,13 @@ require 'spec_helper'
 
 describe Zoom::Actions::User do
   let(:zc) { zoom_client }
-  let(:args) { { id: 'eIimBAXqSrWOcB_EOIXTog', status: 'activate' } }
+  let(:args) { { id: 'eIimBAXqSrWOcB_EOIXTog', action: 'activate' } }
 
   describe '#user_status_update' do
     context 'with a valid response' do
       before :each do
         stub_request(
-          :patch,
+          :put,
           zoom_url("/users/#{args[:id]}/status")
         ).to_return(status: 204,
                     body: json_response('user', 'update_status'),
@@ -29,7 +29,7 @@ describe Zoom::Actions::User do
     context 'with a 400 response' do
       before :each do
         stub_request(
-            :patch,
+            :put,
             zoom_url("/users/#{args[:id]}/status")
         ).to_return(status: 400,
                     body: json_response('error', 'admin_cannot_activated'),
@@ -44,7 +44,7 @@ describe Zoom::Actions::User do
     context 'with a 404 response' do
       before :each do
         stub_request(
-            :patch,
+            :put,
             zoom_url("/users/#{args[:id]}/status")
         ).to_return(status: 404,
                     body: json_response('error', 'user_not_exist'),
