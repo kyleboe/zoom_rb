@@ -67,8 +67,8 @@ module Zoom
       patch 'user_email_update', '/users/:id/email',
         permit: :email
 
-      patch 'user_status_update', '/users/:id/status',
-        permit: :status
+      put 'user_status_update', '/users/:id/status',
+        permit: :action
 
       get 'user_zak', '/users/me/zak'
     end
