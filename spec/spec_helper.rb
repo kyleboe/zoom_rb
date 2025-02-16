@@ -71,3 +71,21 @@ def filter_key(hash, key)
   copy.delete(key)
   copy
 end
+
+class FakeRedisStorage
+  def initialize(_params=nil)
+    @hash = {}
+  end
+
+  def set(key, value)
+    hash[key] = value
+  end
+
+  def get(key)
+    hash[key]
+  end
+
+  private
+
+  attr_reader :hash
+end

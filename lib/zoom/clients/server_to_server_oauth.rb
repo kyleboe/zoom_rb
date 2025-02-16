@@ -3,13 +3,14 @@
 module Zoom
   class Client
     class ServerToServerOAuth < Zoom::Client
-      attr_reader :access_token, :expires_in, :expires_at
-
       def initialize(config)
-        Zoom::Params.new(config).permit(%i[access_token account_id client_id client_secret timeout])
+        Zoom::Params.new(config).permit(
+          %i[access_token account_id client_id client_secret timeout token_store_config auto_refresh_token]
+        )
         Zoom::Params.new(config).require_one_of(%i[access_token account_id])
 
-        config.each { |k, v| instance_variable_set("@#{k}", v) }
+        extract_params(config)
+
         self.class.default_timeout(@timeout || 20)
       end
 
@@ -29,9 +30,9 @@ module Zoom
 
       def set_tokens(response)
         if response.is_a?(Hash) && !response.key?(:error)
-          @access_token = response["access_token"]
-          @expires_in = response["expires_in"]
-          @expires_at = @expires_in ? (Time.now + @expires_in).to_i : nil
+          token_store.access_token = response['access_token']
+          token_store.expires_in = response['expires_in']
+          token_store.expires_at = token_store.expires_in ? (Time.now + token_store.expires_in).to_i : nil
         end
       end
     end

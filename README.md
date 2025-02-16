@@ -69,6 +69,39 @@ rescue Zoom::Error => exception
 end
 ```
 
+## Token Store
+
+Currently supported stores are `:redis` and `:memory`. \
+Memory adapter is used **by default**.
+
+Here is a default configuration for Redis:
+
+```ruby
+Zoom::Client::OAuth.new(
+  access_token: auth['access_token'], 
+  timeout: 15, 
+  token_store_config: [:redis, {
+    host: '127.0.0.1',
+    port: '6379',
+    db: '0',
+    key: -> { SecureRandom.uuid }
+  }]
+)
+```
+
+`key:` is optional, needed to create a Redis key that stores the token \
+example: `zoom_rb:123:access_token`, default: generate `SecureRandom.uuid`
+
+
+## Auto refresh token
+
+You can enable automatic call auth when the token has expired
+```ruby
+Zoom::Client::OAuth.new(
+  # ...
+  auto_refresh_token: true
+)
+```
 
 ## Contributing
 

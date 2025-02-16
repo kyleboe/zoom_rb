@@ -183,6 +183,57 @@ describe Zoom::Client do
           expect(client.oauth_request_headers['Authorization']).to eq("Basic eXl5Onl5eQ==")
         end
       end
+
+      context 'when auto refresh token' do
+        let(:client) { Zoom::Client::ServerToServerOAuth.new(account_id: 'xxx', auto_refresh_token: true) }
+        let(:token_store) { client.send(:token_store) }
+
+        it 'has no token' do
+          expect(client).to receive(:auth)
+
+          client.access_token
+        end
+
+        it 'has expired token' do
+          allow(token_store).to receive(:access_token).and_return('xxx')
+          allow(token_store).to receive(:expires_at).and_return((Time.now - 3600).to_i)
+
+          expect(client).to receive(:auth)
+          client.access_token
+        end
+
+        it 'has active token' do
+          allow(token_store).to receive(:access_token).and_return('xxx')
+          allow(token_store).to receive(:expires_at).and_return((Time.now + 3600).to_i)
+
+          expect(client).not_to receive(:auth)
+          client.access_token
+        end
+      end
+
+      context 'when with redis' do
+        let(:client) do
+          Zoom::Client::ServerToServerOAuth.new(
+            account_id: 'xxx',
+            token_store_config: [:redis, {
+              host: '127.0.0.1',
+              port: '6379',
+              db: '0',
+              key: -> { SecureRandom.uuid }
+            }]
+          )
+        end
+
+        it 'sets the access_token, expires_in and expires_at' do
+          stub_const('::Redis', FakeRedisStorage)
+
+          expected_values = JSON.parse(json_response('token', 'access_token'))
+          client.auth
+          expect(client.access_token).to eq(expected_values['access_token'])
+          expect(client.expires_in).to eq(expected_values['expires_in'])
+          expect(client.expires_at).to eq((Time.now + expected_values['expires_in']).to_i)
+        end
+      end
     end
   end
 end

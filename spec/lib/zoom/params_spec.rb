@@ -3,7 +3,6 @@
 require 'spec_helper'
 
 RSpec.describe Zoom::Params do
-
   describe '#require' do
     let(:params) { Zoom::Params.new(foo: :bar, baz: :bang) }
 
