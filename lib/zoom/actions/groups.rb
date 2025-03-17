@@ -14,6 +14,11 @@ module Zoom
 
       patch 'group_update', '/groups/:group_id',
         permit: :name
+
+      post 'group_member_create', '/groups/:group_id/members',
+        require: :members
+
+      delete 'group_member_delete', '/groups/:group_id/members/:member_id'
     end
   end
 end
