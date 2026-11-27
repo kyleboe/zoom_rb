@@ -2,11 +2,12 @@
 
 module Zoom
   class Error < StandardError
-    attr_reader :code, :errors
+    attr_reader :code, :errors, :headers
 
-    def initialize(message, code = nil, errors = nil)
+    def initialize(message, code = nil, errors = nil, headers = nil)
       @code = code
       @errors = errors
+      @headers = headers || {}
       super(message)
     end
   end

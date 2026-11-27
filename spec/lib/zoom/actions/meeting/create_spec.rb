@@ -59,5 +59,31 @@ describe Zoom::Actions::Meeting do
         expect { response }.to raise_error(Zoom::Error)
       end
     end
+
+    context 'with 429 response' do
+      before :each do
+        stub_request(
+          :post,
+          zoom_url("/users/#{args[:user_id]}/meetings")
+        ).to_return(
+          status: 429,
+          body: '{ "code": 429, "message": "You have exceeded the daily rate limit (400) of Meeting Create/Update API requests permitted for this particular user. You may resume these requests at GMT 00:00:00." }',
+          headers: {
+            'Content-Type' => 'application/json',
+            'X-RateLimit-Type' => 'Daily-limit',
+            'X-RateLimit-Remaining' => '0',
+            'Retry-After' => '2024-08-07T00:00:00Z'
+          }
+        )
+      end
+
+      it 'raises Zoom::TooManyRequests with the response headers' do
+        expect { response }.to raise_error(Zoom::TooManyRequests) { |error|
+          expect(error.headers['x-ratelimit-type']).to eq('Daily-limit')
+          expect(error.headers['x-ratelimit-remaining']).to eq('0')
+          expect(error.headers['retry-after']).to eq('2024-08-07T00:00:00Z')
+        }
+      end
+    end
   end
 end

@@ -11,34 +11,34 @@ module Zoom
         name ? ArgumentError.new("Unrecognized parameter #{name}") : ArgumentError.new
       end
 
-      def raise_error(response, http_code=nil)
+      def raise_error(response, http_code=nil, headers=nil)
         code = response['code']
         message = response['message']
         errors = response['errors']
 
         case http_code
         when 400
-          raise BadRequest.new(message, code, errors)
+          raise BadRequest.new(message, code, errors, headers)
         when 401
-          raise Unauthorized.new(message, code, errors)
+          raise Unauthorized.new(message, code, errors, headers)
         when 403
-          raise Forbidden.new(message, code, errors)
+          raise Forbidden.new(message, code, errors, headers)
         when 404
-          raise NotFound.new(message, code, errors)
+          raise NotFound.new(message, code, errors, headers)
         when 409
-          raise Conflict.new(message, code, errors)
+          raise Conflict.new(message, code, errors, headers)
         when 429
-          raise TooManyRequests.new(message, code, errors)
+          raise TooManyRequests.new(message, code, errors, headers)
         when 500
-          raise InternalServerError.new(message, code, errors)
+          raise InternalServerError.new(message, code, errors, headers)
         else
-          raise Error.new(message, code, errors)
+          raise Error.new(message, code, errors, headers)
         end
       end
 
       def parse_response(http_response)
         return http_response.parsed_response || http_response.code if http_response.success?
-        raise_error(http_response.parsed_response, http_response.code)
+        raise_error(http_response.parsed_response, http_response.code, http_response.headers)
       end
 
       def extract_options!(array)

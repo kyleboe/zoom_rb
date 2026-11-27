@@ -68,6 +68,21 @@ describe Zoom::Utils do
         expect(error.errors).to eq(response['errors'])
       }
     end
+
+    it 'passes response headers to the error' do
+      response = { 'code' => 429, 'message' => 'Too many requests.' }
+      headers = { 'x-ratelimit-type' => 'QPS' }
+      expect { Utils.raise_error(response, 429, headers) }.to raise_error { |error|
+        expect(error.headers).to eq(headers)
+      }
+    end
+
+    it 'leaves error headers empty if none are given' do
+      response = { 'code' => 429, 'message' => 'Too many requests.' }
+      expect { Utils.raise_error(response, 429) }.to raise_error { |error|
+        expect(error.headers).to eq({})
+      }
+    end
   end
 
   describe '#parse_response' do

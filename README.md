@@ -69,6 +69,20 @@ rescue Zoom::Error => exception
 end
 ```
 
+Errors raised for a failed response keep the response headers. Header names are not case sensitive.
+
+```ruby
+begin
+  zoom_client.meeting_create(user_id: user_id, topic: 'Weekly sync')
+rescue Zoom::TooManyRequests => exception
+  if exception.headers['x-ratelimit-type'] == 'Daily-limit'
+    # daily limit of this user, exception.headers['retry-after'] says when it resets
+  else
+    # per-second limit, try again shortly
+  end
+end
+```
+
 
 ## Contributing
 
